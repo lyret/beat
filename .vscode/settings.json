@@ -1,0 +1,20 @@
+{
+	"files.exclude": {
+		"**/.git": true,
+		"**/node_modules": true,
+		"**/.svn": true,
+		"**/.hg": true,
+		"**/CVS": true,
+		"**/.DS_Store": true,
+		".vscode": true,
+		"package-lock.json": true,
+		"package.json": true,
+		"tsconfig.json": true
+	},
+	"search.exclude": {
+		"node_modules/**/package.json": true,
+		".vscode": false,
+		"package.json": false,
+		"tsconfig.json": false
+	}
+}

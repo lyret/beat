@@ -1,0 +1,28 @@
+{
+  "name": "beat",
+  "version": "0.0.1",
+  "description": "A new kind of programing",
+  "main": "index.ts",
+  "dependencies": {
+    "@types/lodash": "^4.14.116",
+    "@types/node": "^10.9.4",
+    "chevrotain": "^3.7.4",
+    "lodash": "^4.17.10"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lyret/beat.git"
+  },
+  "author": "Viktor Lyresten",
+  "license": "UNLICENCED",
+  "bugs": {
+    "url": "https://github.com/lyret/beat/issues"
+  },
+  "homepage": "https://github.com/lyret/beat#readme"
+}
