@@ -1,6 +1,4 @@
-
-![Beat Logo](files/logo.png)
-
+<p align="center"><img src="./files/logo.png" /></p>
 
 # The Beat language
 
