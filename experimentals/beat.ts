@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, existsSync, writeFile } from 'fs'
+import { readFileSync, writeFileSync, existsSync } from 'fs'
 import { template } from 'lodash'
 
 type path = string;
