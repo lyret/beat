@@ -1,0 +1,318 @@
+
+<!-- This is a generated file -->
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+  body {
+    background-color: hsl(30, 20%, 95%)
+  }
+</style>
+
+
+<link rel='stylesheet' href='https://unpkg.com/chevrotain@3.7.4/diagrams/diagrams.css'>
+
+<script src='https://unpkg.com/chevrotain@3.7.4/diagrams/vendor/railroad-diagrams.js'></script>
+<script src='https://unpkg.com/chevrotain@3.7.4/diagrams/src/diagrams_builder.js'></script>
+<script src='https://unpkg.com/chevrotain@3.7.4/diagrams/src/diagrams_behavior.js'></script>
+<script src='https://unpkg.com/chevrotain@3.7.4/diagrams/src/main.js'></script>
+
+<div id="diagrams" align="center"></div>    
+
+<script>
+    window.serializedGrammar = [
+  {
+    "type": "Rule",
+    "name": "tree",
+    "orgText": "function () {\n            var node = _this.SUBRULE(_this.node);\n            return {\n                type: \"tree\",\n                root: node\n            };\n        }",
+    "definition": [
+      {
+        "type": "NonTerminal",
+        "name": "node",
+        "idx": 0
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "node",
+    "orgText": "function () {\n            return _this.OR([\n                { ALT: function () { return _this.SUBRULE(_this.nodeDefinition); } },\n                { ALT: function () { return _this.SUBRULE(_this.openNode); } },\n                { ALT: function () { return _this.SUBRULE(_this.simpleNode); } },\n                { ALT: function () { return _this.SUBRULE(_this.selfClosedNode); } }\n            ]);\n        }",
+    "definition": [
+      {
+        "type": "Alternation",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "Flat",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "nodeDefinition",
+                "idx": 0
+              }
+            ]
+          },
+          {
+            "type": "Flat",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "openNode",
+                "idx": 0
+              }
+            ]
+          },
+          {
+            "type": "Flat",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "simpleNode",
+                "idx": 0
+              }
+            ]
+          },
+          {
+            "type": "Flat",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "selfClosedNode",
+                "idx": 0
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "nodeDefinition",
+    "orgText": "function () {\n            var children = [];\n            // 1. Open the node\n            _this.CONSUME1(LeftChevron);\n            _this.CONSUME1(DEFINE);\n            _this.CONSUME1(Colon);\n            var startIdentifier = _this.CONSUME1(Identifier).image;\n            _this.CONSUME1(RightChevron);\n            // 2. Parse children\n            _this.OPTION2(function () {\n                _this.MANY({\n                    DEF: function () {\n                        children.push(_this.SUBRULE(_this.node));\n                    }\n                });\n            });\n            // 3. Close the node, does identifiers match?\n            _this.CONSUME3(BrokenLeftChevron);\n            var endIdentifier = _this.OPTION3(function () { return _this.CONSUME3(Identifier).image; });\n            _this.CONSUME3(RightChevron);\n            if (endIdentifier && startIdentifier != endIdentifier) {\n                throw new Error(\"Missmatch of identifiers\");\n            }\n            // Return\n            return {\n                type: \"definition\",\n                identifier: startIdentifier,\n                children: children.length ? children : null\n            };\n        }",
+    "definition": [
+      {
+        "type": "Terminal",
+        "name": "LeftChevron",
+        "label": "LeftChevron",
+        "idx": 1,
+        "pattern": "<"
+      },
+      {
+        "type": "Terminal",
+        "name": "DEFINE",
+        "label": "DEFINE",
+        "idx": 1,
+        "pattern": "DEFINE"
+      },
+      {
+        "type": "Terminal",
+        "name": "Colon",
+        "label": "Colon",
+        "idx": 1,
+        "pattern": ":"
+      },
+      {
+        "type": "Terminal",
+        "name": "Identifier",
+        "label": "Identifier",
+        "idx": 1,
+        "pattern": "\\w+"
+      },
+      {
+        "type": "Terminal",
+        "name": "RightChevron",
+        "label": "RightChevron",
+        "idx": 1,
+        "pattern": ">"
+      },
+      {
+        "type": "Option",
+        "idx": 2,
+        "definition": [
+          {
+            "type": "Repetition",
+            "idx": 0,
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "node",
+                "idx": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Terminal",
+        "name": "BrokenLeftChevron",
+        "label": "BrokenLeftChevron",
+        "idx": 3,
+        "pattern": "<\\/"
+      },
+      {
+        "type": "Option",
+        "idx": 3,
+        "definition": [
+          {
+            "type": "Terminal",
+            "name": "Identifier",
+            "label": "Identifier",
+            "idx": 3,
+            "pattern": "\\w+"
+          }
+        ]
+      },
+      {
+        "type": "Terminal",
+        "name": "RightChevron",
+        "label": "RightChevron",
+        "idx": 3,
+        "pattern": ">"
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "openNode",
+    "orgText": "function () {\n            var children = [];\n            // 1. Open the node\n            _this.CONSUME1(LeftChevron);\n            var startIdentifier = _this.CONSUME1(Identifier).image;\n            _this.CONSUME1(RightChevron);\n            // 2. Parse children\n            _this.OPTION2(function () {\n                _this.MANY({\n                    DEF: function () {\n                        children.push(_this.SUBRULE(_this.node));\n                    }\n                });\n            });\n            // 3. Close the node, does identifiers match?\n            _this.CONSUME3(BrokenLeftChevron);\n            var endIdentifier = _this.OPTION3(function () { return _this.CONSUME3(Identifier).image; });\n            _this.CONSUME3(RightChevron);\n            if (endIdentifier && startIdentifier != endIdentifier) {\n                throw new Error(\"Missmatch of identifiers\");\n            }\n            // Return\n            return {\n                identifier: startIdentifier,\n                type: \"node\",\n                subtype: \"openNode\",\n                children: children.length ? children : null\n            };\n        }",
+    "definition": [
+      {
+        "type": "Terminal",
+        "name": "LeftChevron",
+        "label": "LeftChevron",
+        "idx": 1,
+        "pattern": "<"
+      },
+      {
+        "type": "Terminal",
+        "name": "Identifier",
+        "label": "Identifier",
+        "idx": 1,
+        "pattern": "\\w+"
+      },
+      {
+        "type": "Terminal",
+        "name": "RightChevron",
+        "label": "RightChevron",
+        "idx": 1,
+        "pattern": ">"
+      },
+      {
+        "type": "Option",
+        "idx": 2,
+        "definition": [
+          {
+            "type": "Repetition",
+            "idx": 0,
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "node",
+                "idx": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Terminal",
+        "name": "BrokenLeftChevron",
+        "label": "BrokenLeftChevron",
+        "idx": 3,
+        "pattern": "<\\/"
+      },
+      {
+        "type": "Option",
+        "idx": 3,
+        "definition": [
+          {
+            "type": "Terminal",
+            "name": "Identifier",
+            "label": "Identifier",
+            "idx": 3,
+            "pattern": "\\w+"
+          }
+        ]
+      },
+      {
+        "type": "Terminal",
+        "name": "RightChevron",
+        "label": "RightChevron",
+        "idx": 3,
+        "pattern": ">"
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "selfClosedNode",
+    "orgText": "function () {\n            _this.CONSUME(LeftChevron);\n            var identifier = _this.CONSUME(Identifier).image;\n            _this.CONSUME(BrokenRightChevron);\n            return {\n                identifier: identifier,\n                type: \"node\",\n                subtype: \"selfClosedNode\"\n            };\n        }",
+    "definition": [
+      {
+        "type": "Terminal",
+        "name": "LeftChevron",
+        "label": "LeftChevron",
+        "idx": 0,
+        "pattern": "<"
+      },
+      {
+        "type": "Terminal",
+        "name": "Identifier",
+        "label": "Identifier",
+        "idx": 0,
+        "pattern": "\\w+"
+      },
+      {
+        "type": "Terminal",
+        "name": "BrokenRightChevron",
+        "label": "BrokenRightChevron",
+        "idx": 0,
+        "pattern": "\\/>"
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "simpleNode",
+    "orgText": "function () {\n            var identifier = _this.CONSUME(Identifier).image;\n            var children = [];\n            _this.OPTION(function () {\n                _this.MANY({\n                    DEF: function () {\n                        _this.CONSUME(Colon);\n                        children.push(_this.SUBRULE(_this.simpleNode));\n                    },\n                });\n            });\n            return {\n                identifier: identifier,\n                type: \"node\",\n                subtype: \"simpleNode\",\n                children: children.length ? children : null\n            };\n        }",
+    "definition": [
+      {
+        "type": "Terminal",
+        "name": "Identifier",
+        "label": "Identifier",
+        "idx": 0,
+        "pattern": "\\w+"
+      },
+      {
+        "type": "Option",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "Repetition",
+            "idx": 0,
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "Colon",
+                "label": "Colon",
+                "idx": 0,
+                "pattern": ":"
+              },
+              {
+                "type": "NonTerminal",
+                "name": "simpleNode",
+                "idx": 0
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+];
+</script>
+
+<script>
+    var diagramsDiv = document.getElementById("diagrams");
+    main.drawDiagramsFromSerializedGrammar(serializedGrammar, diagramsDiv);
+</script>
