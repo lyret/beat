@@ -1,39 +1,51 @@
-[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
 <p align="center"><img src="./files/beat_logo.png" /></p>
 
 # The Beat language
+[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
+![license](https://img.shields.io/github/license/lyret/beat.svg)
+![last-commit](https://img.shields.io/github/last-commit/lyret/beat.svg)
 
-This is very much a work in progress. Thank you for stopping by. Beat will be a a weird mix between a markup- and programing language. In the long run I also want to build a runtime environment for creating complex applications.
+This is very much a work in progress. Thank you for stopping by. ♥ ♥ ♥
 
-## Syntax example
+Beat can best be seen as a similtainusly exploration and implementation of several idéas that been slowing growing in my mind the last couple of years, therefor I'm unwilling to commit to any specifics, and I'm updating this readme as I go along, but Im currently very interested in the following 2 topics:
 
-```
-Comming soon...
-```
+* How infrastructure as code relate to the idéa of separation between code and data.
 
-## Running
+* The agreements and s.o.c. between applications and runtime environments and between developer and operating systems today.
 
-### Requirements
-```
-npm install
-```
-Requires `typescript` and `ts-node` globaly to run.
+
+## Current syntax
+
+See the state of the syntax at this given commit at [files/current_syntax.html](`beat/files/current_syntax.html)
+
+
+## Requirements
+
+This repository contains several project using [Lerna](https://lernajs.io/). Run `npm install` inside the workspace root to install the dependencies for all packages.
 
 Tested with:
 ```
-ts-node v6.0.3
-node v8.11.4
-typescript v2.8.1
+node v10.11.0
+typescript v3.1.1
+lerna v3.4.0
 ```
+Use `nvm use` to quickly check out the correct version of Node and NPM.
 
-### Steps to run
 
-You need to create a `input.txt` for entering 
+## Running
 
-A `launch.json` with debugging support for vscode is included. Just load up the workspace folder and run the debugger.
+### Launching the language service in vs code
 
-Also you can run manually with `ts-node index.ts`.
+Open the workspace included in the repo. Start a debug session using the `Launch Extension` task.
 
-### What to expect
+A seperate instance of vs code will launch with the language service extension "installed". Currently heavy in development
 
-At the moment some debug output will be generated from each run. Also a `syntax.html` file is creating describing the language.
+### Testing only the parser
+
+Edit the file **test-parer.txt** inside the directory *language_parser* and executer
+```
+npm run compile; node .output/test-parser.js
+```
+Or open the vs code output and start the debug mode called **Test the parser**.
+
+At the moment some debug output will be generated from each run.
