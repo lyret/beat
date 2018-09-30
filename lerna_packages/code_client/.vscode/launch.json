@@ -1,0 +1,18 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "extensionHost",
+			"request": "launch",
+			"name": "Launch Extension",
+			"args": [
+				"--extensionDevelopmentPath=${workspaceFolder}"
+			],
+			"runtimeExecutable": "${execPath}",
+			"outFiles": [
+				"${workspaceFolder}/.output/**/*.js"
+			],
+			"preLaunchTask": "watch all"
+		}
+	]
+}
