@@ -1,0 +1,21 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Test the parser",
+			"type": "node",
+			"request": "launch",
+			"args": [
+				"test-parser.ts"
+			],
+			"runtimeArgs": [
+				"--nolazy",
+				"-r",
+				"ts-node/register"
+			],
+			"sourceMaps": true,
+			"protocol": "inspector",
+			"preLaunchTask": "compile"
+		}
+	]
+}

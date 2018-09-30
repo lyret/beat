@@ -1,0 +1,23 @@
+{
+	"compilerOptions": {
+		"noImplicitAny": false,
+		"noImplicitReturns": true,
+		"noUnusedLocals": false,
+		"noUnusedParameters": true,
+		"allowSyntheticDefaultImports": true,
+		"lib": [
+			"es6"
+		],
+		"outDir": ".output/",
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"target": "es6",
+		"declaration": true,
+		"sourceMap": true
+	},
+	"exclude": [
+		"node_modules",
+		"**/node_modules/**",
+		"**/.output"
+	]
+}

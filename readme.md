@@ -1,4 +1,5 @@
-<p align="center"><img src="./files/logo.png" /></p>
+[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
+<p align="center"><img src="./files/beat_logo.png" /></p>
 
 # The Beat language
 

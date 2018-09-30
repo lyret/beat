@@ -1,28 +1,34 @@
 {
 	"name": "beat",
-	"version": "0.0.1",
-	"description": "Declarative programming markup language",
-	"main": "index.ts",
-	"dependencies": {
-		"chevrotain": "^3.7.4",
-		"lodash": "^4.17.10"
-	},
-	"devDependencies": {
-		"@types/lodash": "^4.14.116",
-		"@types/node": "^10.9.4",
-		"mocha": "^5.2.0"
-	},
-	"scripts": {
-		"test": "mocha"
+	"version": "0.1.0",
+	"description": "A declarative programming markup language",
+	"author": "Viktor Lyresten <viktor@lyresten.se>",
+	"license": "UNLICENCED",
+	"homepage": "https://github.com/lyret/beat#readme",
+	"bugs": {
+		"url": "https://github.com/lyret/beat/issues"
 	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/lyret/beat.git"
 	},
-	"author": "Viktor Lyresten",
-	"license": "UNLICENCED",
-	"bugs": {
-		"url": "https://github.com/lyret/beat/issues"
+	"engines": {
+		"vscode": "^1.23.0",
+		"node": "*"
 	},
-	"homepage": "https://github.com/lyret/beat#readme"
+	"devDependencies": {
+		"@types/node": "^10.11.3",
+		"@types/lodash": "^4.14.116",
+		"typescript": "^3.1.1",
+		"lerna": "^3.4.0"
+	},
+	"scripts": {
+		"compile": "lerna run compile",
+		"watch": "lerna run watch",
+		"bootstrap": "lerna bootstrap; cd lerna_packages/code_client && npm run update-vscode",
+		"list": "lerna ls",
+		"changed": "lerna changed",
+		"publish:npm": "lerna publish",
+		"postinstall": "npm run bootstrap"
+	}
 }

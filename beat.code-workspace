@@ -1,0 +1,56 @@
+{
+	"folders": [
+		{
+			"path": "lerna_packages/code_client"
+		},
+		{
+			"path": "lerna_packages/language_parser"
+		},
+		{
+			"path": "lerna_packages/language_server"
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			".vscode": true,
+			".gitignore": true,
+			".vscodeignore": true,
+			".output": true,
+			".nvmrc": true,
+			"lerna.json": true,
+			"*.code-workspace": true,
+			"tsconfig.base.json": true,
+			"**/tsconfig.json": true,
+			"**/*.log": true,
+			"**/node_modules": true,
+			"**/package-lock.json": true,
+		},
+		"search.exclude": {
+			".vscode": false,
+			".gitignore": false,
+			".vscodeignore": false,
+			".nvmrc": false,
+			"*.code-workspace": false,
+			"lerna.json": false,
+			"tsconfig.base.json": false,
+			"**/tsconfig.json": false,
+			"**/*.log": false,
+			"**/node_modules": true,
+			"**/package-lock.json": true,
+			".output": true
+		},
+		"typescript.tsdk": "./node_modules/typescript/lib",
+		"typescript.tsc.autoDetect": "off",
+		"npm.enableScriptExplorer": false
+	},
+	"launch": {
+		"compounds": [
+			{
+				"name": "Watch all",
+				"configurations": [
+					
+				]
+			}
+		]
+	}
+}
