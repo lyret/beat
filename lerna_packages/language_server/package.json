@@ -13,7 +13,7 @@
 		"node": "*"
 	},
 	"dependencies": {
-		"beat-language-parser": "file:../language_parser",
+		"beat-language-parser": "^0.1.0",
 		"vscode-languageserver": "^4.4.2"
 	},
 	"scripts": {
