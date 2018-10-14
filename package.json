@@ -29,6 +29,6 @@
 		"list": "lerna ls",
 		"changed": "lerna changed",
 		"publish:npm": "lerna publish",
-		"postinstall": "npm run bootstrap"
+		"postinstall": "npm run bootstrap; npm run compile"
 	}
 }
