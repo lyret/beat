@@ -1,4 +1,7 @@
 import { createToken, Lexer, Parser, TokenType } from 'chevrotain';
+import { BeatProblem } from './interfaces';
+
+export { BeatProblem } from './interfaces';
 
 const TwiceBrokenLeftCheveron = createToken({ name: "TwiceBrokenLeftCheveron", pattern: /<\/\//, push_mode: "disabledMode", group: Lexer.SKIPPED });
 const TwiceBrokenRightCheveron = createToken({ name: "TwiceBrokenRightCheveron", pattern: /\/\/>/, pop_mode: true, group: Lexer.SKIPPED });
@@ -128,7 +131,21 @@ export class BeatParserClass extends Parser {
 		this.CONSUME3(RightChevron);
 		
 		if (endIdentifier && startIdentifier != endIdentifier) {
-			throw new Error("Missmatch of identifiers");
+			const problem : BeatProblem = {
+				name: "Missmatch of identifiers",
+				message: `Expected the node '${startIdentifier}' to be closed, but found a closing '${endIdentifier}' identifier instead.`,
+				token: {
+					image: endIdentifier,
+					startOffset: 0,
+					endOffset: 0,
+					startLine: 0,
+					endLine: 0,
+					startColumn: 0,
+					endColumn: 0
+				}
+			}
+
+			throw problem;
 		}
 
 		// Return
