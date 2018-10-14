@@ -52,6 +52,7 @@
 		"watch": "tsc -w -p ./tsconfig.json",
 		"compile": "tsc -p ./tsconfig.json",
 		"update-vscode": "vscode-install",
+		"postinstall": "npm run update-vscode",
 		"vscode:prepublish": "npm run update-vscode && npm run compile"
 	}
 }

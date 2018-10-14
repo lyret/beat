@@ -29,6 +29,16 @@
 			]
 		},
 		{
+			"label": "initialize workspace",
+			"type": "shell",
+			"command": "cd ../..; lerna bootstrap",
+			"presentation": {
+				"panel": "shared",
+				"reveal": "silent"
+			},
+			"problemMatcher": []
+		},
+		{
 			"label": "compile all",
 			"type": "shell",
 			"command": "cd ../..; npm run compile",
