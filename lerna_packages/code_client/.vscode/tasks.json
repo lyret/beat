@@ -31,7 +31,7 @@
 		{
 			"label": "initialize workspace",
 			"type": "shell",
-			"command": "cd ../..; lerna bootstrap",
+			"command": "cd ../..; npm install",
 			"presentation": {
 				"panel": "shared",
 				"reveal": "silent"

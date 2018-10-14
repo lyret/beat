@@ -7,7 +7,7 @@
 
 This is very much a work in progress. Thank you for stopping by. ♥ ♥ ♥
 
-Beat can best be seen as a similtainusly exploration and implementation of several idéas that been slowing growing in my mind the last couple of years, therefor I'm unwilling to commit to any specifics, and I'm updating this readme as I go along, but Im currently very interested in the following 2 topics:
+Beat can best be seen as an exploration and implementation of several idéas that been slowly rotating in my mind the last couple of years, therefor I'm unwilling to commit to any specifics, and I'm updating this readme as I go along, but Im currently very interested in the following 2 topics:
 
 * How infrastructure as code relate to the idéa of separation between code and data.
 
@@ -34,11 +34,17 @@ Use `nvm use` to quickly check out the correct version of Node and NPM.
 
 ## Running
 
+### Getting started
+
+Launch the workspace in VS Code and run the task named `initialize workspace`. You are now ready to develop!
+
+Alternative, execute the `npm install` command in the root folder
+
 ### Launching the language service in vs code
 
-Open the workspace included in the repo. Start a debug session using the `Launch Extension` task.
+Open the workspace in VS Code start debug session by selecting the option `Launch Extension` from the debug menu.
 
-A seperate instance of vs code will launch with the language service extension "installed". Currently heavy in development
+A new instance of Code will launch in a new window with the language service extension installed.
 
 ### Testing only the parser
 

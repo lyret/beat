@@ -12,7 +12,7 @@
 			"outFiles": [
 				"${workspaceFolder}/.output/**/*.js"
 			],
-			"preLaunchTask": "watch all"
+			"preLaunchTask": "compile all"
 		}
 	]
 }
