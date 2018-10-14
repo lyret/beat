@@ -32,7 +32,10 @@
 			"label": "compile all",
 			"type": "shell",
 			"command": "cd ../..; npm run compile",
-			"group": "build",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
 			"presentation": {
 				"panel": "shared",
 				"reveal": "silent"
@@ -46,10 +49,7 @@
 			"type": "shell",
 			"command": "cd ../..; npm run watch",
 			"isBackground": true,
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
+			"group": "build",
 			"presentation": {
 				"panel": "shared",
 				"reveal": "silent"
