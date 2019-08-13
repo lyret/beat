@@ -1,0 +1,144 @@
+card: [
+	name: { =string }
+	value: { =number }
+	quantity: { =number }
+]
+
+cards: { ...card } [
+	[ name: Four; value: 5; quantity: 8 ]
+	[ name: Five; value: 5; quantity: 8 ]
+	[ name: Six; value: 5; quantity: 8 ]
+	[ name: Seven; value: 5; quantity: 8 ]
+	[ name: Eigth; value: 10; quantity: 8 ]
+	[ name: Nine; value: 10; quantity: 8 ]
+	[ name: Ten; value: 10; quantity: 8 ]
+	[ name: Jack; value: 10; quantity: 8 ]
+	[ name: Dame; value: 10; quantity: 8 ]
+	[ name: Queen; value: 10; quantity: 8 ]
+	[ name: King; value: 10; quantity: 8 ]
+	[ name: Ace; value: 20; quantity: 8 ]
+	[ name: Two; value: 10; quantity: 8 ]
+	[ name: BlackThree; value: 5; quantity: 4 ]
+	[ name: RedThree; value: 5; quantity: 4 ]
+	[ name: Joker; value: 50; quantity: 4 ]
+]
+
+join([
+	_: Adds the values of inputs 1 and 2 to a new collection.
+	1: []
+	2: []
+	=: [
+		(1)
+		(2)
+	]
+])
+
+remove([
+	_: Removes the value of input 2 from the given input 1.
+	1: []
+	2: []
+	=: [
+		(1.{!=2})
+	]
+])
+
+shift([
+	_: Moves the first element of a given list input (1) to the bottom.
+	1: {=list}
+	=: [
+
+	]
+])
+
+discard([
+	_: Discards a card from the current players hand
+	game: { =game }
+	card: { =(game).player.hand.* }
+	=: { =game }[
+		(game)
+		player: join((game.player), [ hand: remove(game.player.hand, card) ])
+		pile: [join(card, game.pile.*)]
+]
+])
+
+draw([
+	_: Draws a card from the current players hand.
+	game: { =game }
+	card: (game.deck.0)
+	=: { =game }[
+		(game)
+		player: [ ...game.player, hand: join(game.player.hand.*, card) ]
+		deck: remove(game.deck, game.deck.0)
+]
+])
+
+pass([
+	_: Passes the turn to the next player.
+	game: { =game }
+	=: { =game }[
+		(game)
+		players: shift(game.players)
+	]
+])
+
+game: [
+	finished: {=bool} false
+	locked: {=bool} false
+	player: (.players.0)
+	players: [
+		[ name: olsson; hand: {...cards} [] ]
+		[ name: lyret; hand: {...cards} [] ]
+		[ name: anders; hand: {...cards} [] ]
+		[ name: david; hand: {...cards} [] ]
+	]
+	deck: { ...card } []
+	pile: { ...card } []
+]
+
+// ASDASDASD
+
+game: (../canasta.game)
+
+// DIFFERENT DOCUMENT
+game: (./canasta.game)
+
+
+// NOTES
+these could be definitions for moves:
+move: {
+	player: (players(*))
+	pick: pile | deck
+	plays: 
+}
+legalmoves: {
+	open:
+}
+asdasda: {
+	1: [pick pile] | [pick deck]
+	2: open
+	3: discard
+}
+asdadsad: {
+	1: pick deck
+	2: play | no plays | open
+	3: discard
+}
+asdad: {
+	1: pick pile
+	2: play | skip | open
+	3: discard
+	4: gain cards
+	5: play | skip | exit
+}
+dsadas: {
+	1: pick deck
+	2: play | skip
+	3: discard | exit
+}
+
+exit 
+//$.player.hand: { =empty }
+//
+
+pick deck 
+//$.deck: { !=empty }

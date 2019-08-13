@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "lerna_packages/language_server"
+		},
+		{
+			"path": "planing"
 		}
 	],
 	"settings": {

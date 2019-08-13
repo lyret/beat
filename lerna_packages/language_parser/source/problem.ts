@@ -1,4 +1,9 @@
 
+/**
+ * **BeatProblem**
+ * Interface for making sure that problems identified in
+ * the parser is formatted correctly
+ */
 export interface BeatProblem {
 	name: string,
 	message: string

@@ -1,0 +1,33 @@
+Root:-
+	Components:-
+		Conversation(
+			with: Root.Contacts.*
+			contains: ../Message
+		)
+		Message(
+			#contains: Text
+			composed: Date
+			from : Root.Users.(*).active || ../(Conversation).with
+		)
+	-:
+	Themes:-
+		Theme(ThemeOne, color: blue, default, selected)
+		Theme(ThemeTwo, color: red)
+	-:
+	Users :-
+		#unique: .active
+		Viktor.active
+	-:
+	Contacts :-
+		Andreas
+	-:
+	ActiveUser: {Root/Users/(.active)}
+	MessagesToMe: {Root/Conversations/**/(.to: ActiveUser)}
+	Conversations :-
+		#accepts: Components.Conversation
+		Conversation(with: Andreas) :-
+			Message(composed: 2018-02-10 03:33 from:Viktor to:Andreas) : Yo Andreas! :)
+			Message(composed: 2018-02-10 03:48 from:Andreas to:Viktor) : Hello Viktor ^^
+		-:
+	-:
+-:

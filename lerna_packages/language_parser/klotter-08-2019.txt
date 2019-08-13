@@ -1,0 +1,17 @@
+person: [
+	name: { =string {#firstname: {=string?} #lastname: {=string?} }
+	phone: { =number? }
+]
+
+contacts: { =(person)* } [
+	[
+		name: Andreas Malmqvist
+	]
+	[
+		name: [Viktor #firstname Lyresten #lastname]
+		phone: 0703749226
+	]
+	[
+		name: [[Jean Luc] #firstname Picard #lastname]
+	]
+]

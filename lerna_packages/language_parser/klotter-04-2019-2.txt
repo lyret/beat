@@ -1,0 +1,100 @@
+Letters[
+	- A
+	- B
+	- C
+	- D
+	- E
+	- F
+	- G
+	- H
+	- I
+	- J
+	- K
+	- L
+	- M
+	- N
+	- O
+	- P
+	- Q
+	- R
+	- S
+	- T
+	- U
+	- V
+	- W
+	- X
+	- Y
+	- Z
+	- Å
+	- Ä
+	- Ö
+];
+
+Number[
+	- 0
+	- 1
+	- 2
+	- 3 [
+		- 3.0
+		- 3.1 [
+			- 3.10
+			- 3.11
+			- 3.12
+			- 3.13
+			- 3.14
+			- 3.15
+			- 3.16
+			- 3.17
+			- 3.18
+			- 3.19
+		]
+		- 3.2
+		- 3.3
+		- 3.4
+		- 3.5
+		- 3.6
+		- 3.7
+		- 3.8
+		- 3.9
+	]
+	- 4
+	- 5
+	- 6
+	- 7
+	- 8
+	- 9
+	- 10
+	- 11
+	- 12
+	- 13
+]
+
+Geography[
+	Directions[
+		North,
+		East,
+		South,
+		West
+	]
+	Longitude[
+		"{Direction}{LLL}:{MM}:{SS}";
+		(
+			Direction[
+				- E: Compass.Points.East
+				- W: Compass.Points.West
+			]
+			LLL: Number:0<180.
+			MM: Number:59>0.
+			SS: Number:59>0.
+		);
+
+	]
+	Latitude.
+]
+
+System[
+	
+	Position(Longitude, Latitude)
+]
+
+

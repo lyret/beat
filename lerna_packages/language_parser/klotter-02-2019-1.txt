@@ -1,0 +1,18 @@
+<Root>
+	<Definitions>
+		<@transform>
+			name : [ Weather Transform ]
+			<//@From : 
+				<Weather>{...}</Weather>
+			@To : 
+				<Weather>
+					Location: { location }
+					Temprature : { degrees }
+				</Weather>//>
+		</@transform>
+	</Definitions>
+	<Main>
+		<Weather/>
+		<@lol/>
+	</Main>
+</Root>

@@ -5,6 +5,7 @@
 	"author": "Viktor Lyresten <viktor@lyresten.se>",
 	"license": "UNLICENCED",
 	"publisher": "Viktor Lyresten <viktor@lyresten.se>",
+	"categories": [ "Programming Languages" ],
 	"keywords": [
 		"multi-root ready"
 	],
@@ -20,15 +21,31 @@
 		"onLanguage:plaintext"
 	],
 	"contributes": {
+		"languages": [
+			{
+				"id": "beat",
+				"aliases": [
+					"BEAT", "Beat Language"
+				],
+				"extensions": [".b"]
+			}
+		],
+		"grammars": [
+			{
+				"language": "beat",
+				"scopeName": "source.beat",
+				"path": "./syntax/beat.tmLanguage.json"
+			}
+		],
 		"configuration": {
 			"type": "object",
-			"title": "Example configuration",
+			"title": "Beat language server configuration",
 			"properties": {
 				"languageServerExample.maxNumberOfProblems": {
 					"scope": "resource",
 					"type": "number",
 					"default": 100,
-					"description": "Controls the maximum number of problems produced by the server."
+					"description": "Controls the maximum number of problems reported at once by the language server"
 				},
 				"languageServerExample.trace.server": {
 					"scope": "window",
@@ -39,7 +56,7 @@
 						"verbose"
 					],
 					"default": "off",
-					"description": "Traces the communication between VS Code and the language server."
+					"description": "Traces the communication between VS Code and the language server"
 				}
 			}
 		}

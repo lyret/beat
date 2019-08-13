@@ -1,0 +1,48 @@
+<Root>
+	<Components>
+		<Conversation {
+			with: Root.Contacts.*
+			contains: ../Message
+		} />
+		<Message {
+			composed: Date
+			from:
+				Root.Users.(*).active # * = first node, ** = all nodes, how to handle splice (*10*) (*4-*) ? how to handle optional (0) nodes ?
+				../(Conversation).with # could match several if not active was defined as 'unique' on Users
+			/to: if this.from is <Users/* active> then ../(Conversation).with
+			/to: if this.from is Users.active
+			/to: if this.from is Root/Users/(.active)
+			/to: if this.from is ../(Conversation).with then Root/Users/(.active)
+			contains: Text
+		}>
+	</Components>
+	<Themes>
+		<Theme: ThemeOne color: blue default selected />
+		<Theme: ThemeTwo color: red />
+	</Themes>
+	<Users>
+		<Viktor active />
+	</Users {
+		unique: active
+	}>
+	<ActiveUser>{Root/Users/(.active)}</ActiveUser>
+	<Contacts>
+		<Andreas/>
+	</Contacts>
+	<Conversations>
+		<Conversation with: Andreas>
+			<Message composed: 2018-02-10 03:33 from: Viktor to: Andreas>
+				Yo Andreas! :)
+			</Message>
+			<Message composed: 2018-02-10 03:48 from: Andreas to: Viktor>
+				Hello Viktor ^^
+			</Message>
+		</Conversation>
+	</Conversations {
+		accepts: Components.Conversation
+	}>
+	<MessagesToMe>{Root/Conversations/**/(.to: ActiveUser)}</MessagesToMe>
+</Root>
+
+
+Hur deklarera att en komponent matchar en annan ? Arv <{Components.Conversation}>

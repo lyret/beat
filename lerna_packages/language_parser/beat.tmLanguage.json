@@ -1,0 +1,43 @@
+{
+  "name": "beat language syntax",
+  "version": "0.1.0",
+  "scopeName": "source.beat",
+  "fileTypes": [
+    "b"
+  ],
+  "patterns": [
+    {
+      "match": "<\/",
+      "name": "declaration.tag"
+    },
+    {
+      "match": "\/>",
+      "name": "declaration.tag"
+    },
+    {
+      "match": "<",
+      "name": "declaration.tag"
+    },
+    {
+      "match": ">",
+      "name": "declaration.tag"
+    },
+    {
+      "match": "DEFINE",
+      "name": "keyword"
+    },
+    {
+      "match": ":",
+      "name": "declaration.tag"
+    },
+    {
+      "match": "\w+",
+      "name": "variable"
+    },
+    {
+      "begin": "<\/\/",
+      "contentName": "comment",
+      "end": "\/\/>"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+Signatur på nod (?):
+
+
+<Name>{ transformers }<composition ... /><composition ... /></Name>
+ ^nodnamn    ^transpiler space ?
+
+Program:
+
+<Root>
+	<User><Viktor/></User>
+	<Contacts>
+		<Andreas/>
+	</Contacts>
+	<Conversations>
+		{
+			<accepts>
+				<Conversation>
+					with: root:Contacts
+					{
+						<accepts>
+							<Message>
+								composed: Date
+								from: ..:with || root.user
+								to: ..:with || root.user && !from
+								text: Text
+							</Message>
+						</accepts>
+					}
+				</Conversation>
+			</accepts>
+		}
+		<Conversation>
+			<with><Andreas/></with>
+			{
+				<Message>
+					<composed>2018-02-10 03:33</composed>
+					<from><Viktor></from>
+					<to><Andreas></to>
+					<text>
+					Yo Andreas! :)
+					</text>
+				</Message>
+				<Message>
+					<composed>2018-02-10 03:48</composed>
+					<from><Andreas></from>
+					<to><Viktor></to>
+					<text>
+						Hello Viktor ^^
+					</text>
+				</Message>
+			}
+		</Conversation>
+	</Conversations>
+</Root>
+
+
+
+Färdig HTML representation:
+
+<html>
+	<head/>
+	<body>
+		<div>
+			<h1>Talking to Andreas<h1>
+			<table>
+				<tr>
+					<td>Viktor</td>
+					<td>2018-02-10 03:33</td>
+					<td><b>Yo Andreas! :)</b></td>
+				</tr>
+				<tr>
+					<td>Viktor</td>
+					<td>2018-02-10 03:48</td>
+					<td><b>Hello Viktor ^^</b></td>
+				</tr>
+			</table>
+			<form onSubmit="">
+				<input/>
+				<button type="submit"/>
+			</form>
+		</div>
+	</body>
+</html>
+
+
+Transformer för meddelanden:
+
+
+transform(
+	<Conversation>
+		<Message>
+			<composed/>
+			<from/>
+			<to/>
+			<text/>
+		</Message>
+	</Conversation>
+) => (
+<tr>
+	<td>{from}</td>
+	<td>{composed}</td>
+	<td><b>{text}</b></td>
+</tr>
+)
+
+
+Behöver ha delade signaturer/interfaces och data för att avgöra tillgänglig medlemskap.
+
+Måste ha tydliga regler på vad som kan läggas i ett träd för "intellisense" på träden.

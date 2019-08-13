@@ -55,3 +55,7 @@ npm run compile; node .output/test-parser.js
 Or open the vs code output and start the debug mode called **Test the parser**.
 
 At the moment some debug output will be generated from each run.
+
+## A big *Thank you* to the authors of the following articles:
+https://macromates.com/manual/en/language_grammars
+https://www.apeth.com/nonblog/stories/textmatebundle.html

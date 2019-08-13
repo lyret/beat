@@ -1,0 +1,18 @@
+
+LISP:
+
+() => ()
+
+listor
+
+'func or list
+lists in lists
+
+
+
+Root(
+	data
+	%rule
+	parent(
+		%rule; data; data; %rule; data
+))

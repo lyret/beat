@@ -10,7 +10,7 @@ import {
 
 let client: LanguageClient;
 
-/** Starts the language service */
+/** Starts the language server */
 export function activate(context: ExtensionContext) {
 
 	/** Path to the server module */
@@ -38,14 +38,14 @@ export function activate(context: ExtensionContext) {
 	/** Language client options */
 	let clientOptions: LanguageClientOptions = {
 		/** Register the server for plain text documents */
-		documentSelector: [{ scheme: 'file', language: 'plaintext' }],
+		documentSelector: [{ scheme: 'file', language: 'beat' }],
 		/** Notify the server about file changes to '.clientrc files contained in the workspace */
 		synchronize: {
 			fileEvents: workspace.createFileSystemWatcher('**/.clientrc')
 		}
 	};
 
-	// Create the language client and start the client.
+	// Create the client for connecting to the language server
 	client = new LanguageClient(
 		'BeatLanguageServer',
 		'Language Server for working with Beat',

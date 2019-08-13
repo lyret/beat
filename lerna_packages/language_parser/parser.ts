@@ -1,23 +1,28 @@
-import { createToken, Lexer, Parser, TokenType } from 'chevrotain';
-import { BeatProblem } from './interfaces';
+import { createToken, Lexer, Parser, TokenType, ITokenConfig } from 'chevrotain';
+import { BeatToken, BeatProblem } from './source';
 
-export { BeatProblem } from './interfaces';
+const TwiceBrokenLeftCheveron = new BeatToken({ name: "TwiceBrokenLeftCheveron", pattern: /<\/\//, push_mode: "disabledMode", group: Lexer.SKIPPED }, { id: "comment-block", type: 'comment', mode: 'begins', inside: true  });
+const TwiceBrokenRightCheveron = new BeatToken({ name: "TwiceBrokenRightCheveron", pattern: /\/\/>/, pop_mode: true, group: Lexer.SKIPPED }, { id: "comment-block", type: 'comment', mode: 'ends', inside: true  });
+const BrokenLeftChevron = new BeatToken({ name: "BrokenLeftChevron", pattern: /<\// }, { type: "declaration.tag" });
+const BrokenRightChevron = new BeatToken({ name: "BrokenRightChevron", pattern: /\/>/ }, { type: "declaration.tag" });
+const LeftChevron = new BeatToken({ name: "LeftChevron", pattern: /</ }, { type: "declaration.tag" });
+const RightChevron = new BeatToken({ name: "RightChevron", pattern: />/ }, { type: "declaration.tag" });
+const SpecificIdentifier = new BeatToken({ name: "SpecificIdentifier", pattern: /@[A-Za-z0-9]+/ }, { type: "keyword" });
+const Colon = new BeatToken({ name: "Colon", pattern: /:/ }, { type: "declaration.tag" });
+const Identifier = new BeatToken({ name: "Identifier", pattern: /[A-Za-z0-9]+/ }, { type: "variable" });
+const StringifiedText = new BeatToken({ name: "StringifiedText", pattern: /\[(.*(?=\]))/ }, { type: 'string' });
+const DisabledText = new BeatToken({ name: "DisabledText", pattern: /\w+/, group: Lexer.SKIPPED });
+const WhiteSpace = new BeatToken({ name: "WhiteSpace", pattern: /\s+/, group: Lexer.SKIPPED });
+const Seperator = new BeatToken({ name: "Seperator", pattern: /[\n\r]/ });
 
-const TwiceBrokenLeftCheveron = createToken({ name: "TwiceBrokenLeftCheveron", pattern: /<\/\//, push_mode: "disabledMode", group: Lexer.SKIPPED });
-const TwiceBrokenRightCheveron = createToken({ name: "TwiceBrokenRightCheveron", pattern: /\/\/>/, pop_mode: true, group: Lexer.SKIPPED });
-const BrokenLeftChevron = createToken({ name: "BrokenLeftChevron", pattern: /<\// });
-const BrokenRightChevron = createToken({ name: "BrokenRightChevron", pattern: /\/>/ });
-const LeftChevron = createToken({ name: "LeftChevron", pattern: /</ });
-const RightChevron = createToken({ name: "RightChevron", pattern: />/ });
-const DEFINE = createToken({ name: "DEFINE", pattern: /DEFINE/ });
-const Colon = createToken({ name: "Colon", pattern: /:/ });
-const Identifier = createToken({ name: "Identifier", pattern: /\w+/ });
-const DisabledText = createToken({ name: "Identifier", pattern: /\w+/, group: Lexer.SKIPPED });
-const WhiteSpace = createToken({ name: "WhiteSpace", pattern: /\s+/, group: Lexer.SKIPPED });
+export const SyntaxDefinitionPatterns = BeatToken.SyntaxDefinitionPatterns;
+
+/** Converts a list of BeatTokens to Chevotrain tokens */
+const raw = (...tokens : BeatToken[]) => tokens.map((token) => token.Token);
 
 export const LexerDefinition = {
 	modes: {
-		"default": [
+		"default": raw(
 			// Symbols
 			TwiceBrokenLeftCheveron,
 			BrokenLeftChevron,
@@ -25,18 +30,21 @@ export const LexerDefinition = {
 			LeftChevron,
 			RightChevron,
 			Colon,
-			// Keywords
-			DEFINE,
-			// The Identifier must appear after the keywords because all keywords are valid identifiers.
+			StringifiedText,
+			// Keywords & modifiers
+			// none right now
+			// The Identifier(s) must appear after the keywords because all keywords are valid identifiers.
+			SpecificIdentifier,
 			Identifier,
-			// Whitespace
+			// Whitespace & others
+			Seperator,
 			WhiteSpace
-		],
-		"disabledMode": [
+		),
+		"disabledMode": raw(
 			TwiceBrokenRightCheveron,
 			DisabledText,
 			WhiteSpace
-		]
+		)
 	},
 	defaultMode: "default"
 }
@@ -49,7 +57,7 @@ export const BeatLexer = new Lexer(LexerDefinition);
 export class BeatParserClass extends Parser {
 
 	constructor() {
-		super(LexerDefinition.modes.default);
+		super(LexerDefinition.modes.default, { outputCst: false });
 		this.performSelfAnalysis();
 	}
 
@@ -64,57 +72,24 @@ export class BeatParserClass extends Parser {
 
 	public node = this.RULE("node", () => {
 		return this.OR([
-			{ ALT: () => this.SUBRULE(this.nodeDefinition) },
 			{ ALT: () => this.SUBRULE(this.openNode) },
 			{ ALT: () => this.SUBRULE(this.simpleNode) },
-			{ ALT: () => this.SUBRULE(this.selfClosedNode) }
+			{ ALT: () => this.SUBRULE(this.selfClosedNode) },
+			{ ALT: () => this.SUBRULE(this.stringNode) },
+			{ ALT: () => this.CONSUME4(Seperator.Token) }
 		]);
-	});
-
-	
-	private nodeDefinition = this.RULE("nodeDefinition", () => {
-		const children: any[] = []
-
-		// 1. Open the node
-		this.CONSUME1(LeftChevron);
-		this.CONSUME1(DEFINE);
-		this.CONSUME1(Colon);
-		const startIdentifier = this.CONSUME1(Identifier).image;
-		this.CONSUME1(RightChevron);
-
-		// 2. Parse children
-		this.OPTION2(() => {
-			this.MANY({
-				DEF: () => {
-					children.push(this.SUBRULE(this.node))
-				}
-			});
-		});
-		
-		// 3. Close the node, does identifiers match?
-		this.CONSUME3(BrokenLeftChevron);
-		const endIdentifier = this.OPTION3(() => this.CONSUME3(Identifier).image);
-		this.CONSUME3(RightChevron);
-		
-		if (endIdentifier && startIdentifier != endIdentifier) {
-			throw new Error("Missmatch of identifiers");
-		}
-
-		// Return
-		return {
-			type: "definition",
-			identifier: startIdentifier,
-			children: children.length ? children : null
-		};
 	});
 
 	private openNode = this.RULE("openNode", () => {
 		const children: any[] = []
 
 		// 1. Open the node
-		this.CONSUME1(LeftChevron);
-		const startIdentifier = this.CONSUME1(Identifier).image;
-		this.CONSUME1(RightChevron);
+		this.CONSUME1(LeftChevron.Token);
+		const startIdentifier = this.OR1([
+			{ ALT: () => this.CONSUME1(Identifier.Token).image },
+			{ ALT: () => this.CONSUME1(SpecificIdentifier.Token).image }
+		]);
+		this.CONSUME1(RightChevron.Token);
 
 		// 2. Parse children
 		this.OPTION2(() => {
@@ -125,11 +100,15 @@ export class BeatParserClass extends Parser {
 			});
 		});
 		
-		// 3. Close the node, does identifiers match?
-		this.CONSUME3(BrokenLeftChevron);
-		const endIdentifier = this.OPTION3(() => this.CONSUME3(Identifier).image);
-		this.CONSUME3(RightChevron);
+		// 3. Close the node
+		this.CONSUME3(BrokenLeftChevron.Token);
+		const endIdentifier = this.OPTION3(() => this.OR3([
+			{ ALT: () => this.CONSUME3(Identifier.Token).image },
+			{ ALT: () => this.CONSUME3(SpecificIdentifier.Token).image }
+		]));
+		this.CONSUME3(RightChevron.Token);
 		
+		// 4. Check that the two identifiers match, otherwise we have a mismatch
 		if (endIdentifier && startIdentifier != endIdentifier) {
 			const problem : BeatProblem = {
 				name: "Missmatch of identifiers",
@@ -158,9 +137,12 @@ export class BeatParserClass extends Parser {
 	});
 
 	private selfClosedNode = this.RULE("selfClosedNode", () => {
-		this.CONSUME(LeftChevron);
-		const identifier = this.CONSUME(Identifier).image;
-		this.CONSUME(BrokenRightChevron);
+		this.CONSUME(LeftChevron.Token);
+		const identifier = this.OR([
+			{ ALT: () => this.CONSUME(Identifier.Token) },
+			{ ALT: () => this.CONSUME(SpecificIdentifier.Token) }
+		]);
+		this.CONSUME(BrokenRightChevron.Token);
 
 		return {
 			identifier: identifier,
@@ -169,18 +151,28 @@ export class BeatParserClass extends Parser {
 		};
 	});
 
+	private stringNode = this.RULE("stringNode", () => {
+		const data = this.CONSUME(StringifiedText.Token);
+		this.OPTION(() => { this.CONSUME(Seperator.Token) });
+
+		return {
+			//identifier: data,
+			type: "node",
+			subtype: "string",
+			data: data
+		};
+	});
+
 	private simpleNode = this.RULE("simpleNode", () => {
-		const identifier = this.CONSUME(Identifier).image;
+		const identifier = this.CONSUME(Identifier.Token).image;
 		const children: any[] = []
 
 		this.OPTION(() => {
-			this.MANY({
-				DEF: () => {
-					this.CONSUME(Colon);
-					children.push(this.SUBRULE(this.simpleNode));
-				},
-			});
+			this.CONSUME(Colon.Token);
+			children.push(this.SUBRULE(this.node));
 		});
+		
+		this.OPTION2(() => { this.CONSUME2(Seperator.Token) });
 
 		return {
 			identifier: identifier,
