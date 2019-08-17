@@ -3,7 +3,7 @@ person: [
 	phone: { =number? }
 ]
 
-contacts: { =(person)* } [
+contacts: { =(person) } [
 	[
 		name: Andreas Malmqvist
 	]

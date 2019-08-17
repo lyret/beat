@@ -100,7 +100,10 @@ game: [
 game: (../canasta.game)
 
 // DIFFERENT DOCUMENT
-game: (./canasta.game)
+game: import(file://canasta.game)
+game: draw(game)
+game: discard(game)
+
 
 
 // NOTES
