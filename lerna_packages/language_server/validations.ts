@@ -7,7 +7,7 @@ import {
 } from 'vscode-languageserver';
 
 import './interfaces';
-import { BeatParser, BeatLexer, BeatProblem } from 'beat-language-parser'
+import { BeatParser, BeatLexer, /* BeatProblem */ } from 'beat-language-parser'
 
 export function getDocumentSettings(resource: string, connection: Connection, runtime: ServerRuntime): Thenable<LanguageServerSettings> {
 
@@ -50,11 +50,11 @@ export async function validateTextDocument(textDocument: TextDocument, connectio
 	// let pattern = /\b[A-Z]{2,}\b/g;
 	// let m: RegExpExecArray;
 
-	const problems: BeatProblem[] = [];
+	const problems: /* BeatProblem */any[] = []; //FIXME: was BeatProblem
 
 	try {
 		BeatParser.input = tokens;
-		BeatParser.tree();
+		BeatParser.createNodeTree();
 
 		if (BeatParser.errors.length > 0) {
 			for (const error of BeatParser.errors) {
