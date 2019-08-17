@@ -1,7 +1,7 @@
 /** 
  * **BeatSyntaxConfig**
  * Configuration object for declering how a interpreted beat token
- * should be highlighted when the TextMate team is active
+ * should be highlighted when using the textmate grammer
  */
 export interface BeatSyntaxCongig {
 	/** (optional) An per scope unique identifier */ id? : string,
@@ -32,6 +32,7 @@ type SyntaxHighlightName =
 "invalid" |
 "invalid.deprecated.trailing-whitespace" |
 "keyword" |
+"keyword.control" |
 "keyword.control.import" |
 "keyword.operator.js" |
 "markup.heading" |
