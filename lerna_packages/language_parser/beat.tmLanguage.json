@@ -1,43 +1,98 @@
 {
   "name": "beat language syntax",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "scopeName": "source.beat",
   "fileTypes": [
     "b"
   ],
   "patterns": [
     {
-      "match": "<\/",
-      "name": "declaration.tag"
+      "match": "\\:",
+      "name": "keyword.control"
     },
     {
-      "match": "\/>",
-      "name": "declaration.tag"
+      "match": "\\#",
+      "name": "keyword.control"
     },
     {
-      "match": "<",
-      "name": "declaration.tag"
+      "match": "[A-Za-z0-9]+",
+      "name": "constant"
     },
     {
-      "match": ">",
-      "name": "declaration.tag"
+      "match": "\\/.*\\/",
+      "name": "comment"
     },
     {
-      "match": "DEFINE",
-      "name": "keyword"
+      "match": "\\[",
+      "name": "entity.name.tag"
     },
     {
-      "match": ":",
-      "name": "declaration.tag"
+      "match": "\\]",
+      "name": "entity.name.tag"
     },
     {
-      "match": "\w+",
-      "name": "variable"
+      "match": "\\{",
+      "name": "meta.tag"
     },
     {
-      "begin": "<\/\/",
-      "contentName": "comment",
-      "end": "\/\/>"
+      "match": "\\}",
+      "name": "meta.tag"
+    },
+    {
+      "match": "\\(",
+      "name": "entity.name.tag"
+    },
+    {
+      "match": "\\)",
+      "name": "entity.name.tag"
+    },
+    {
+      "match": "\\=",
+      "name": "keyword.control"
+    },
+    {
+      "match": "\\?",
+      "name": "keyword.control"
+    },
+    {
+      "match": "\\.\\.\\.",
+      "name": "keyword.control"
+    },
+    {
+      "match": "\\:\\:",
+      "name": "keyword.control"
+    },
+    {
+      "match": "l",
+      "name": "keyword.control"
+    },
+    {
+      "match": "->",
+      "name": "support.variable"
+    },
+    {
+      "match": "=[>|=]",
+      "name": "support.variable"
+    },
+    {
+      "match": "@",
+      "name": "support.function"
+    },
+    {
+      "match": "string",
+      "name": "constant.language"
+    },
+    {
+      "match": "number",
+      "name": "constant.language"
+    },
+    {
+      "match": "bool",
+      "name": "constant.language"
+    },
+    {
+      "match": "any",
+      "name": "constant.language"
     }
   ]
 }

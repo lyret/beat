@@ -1,0 +1,584 @@
+
+<!-- This is a generated file -->
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+  body {
+    background-color: hsl(30, 20%, 95%)
+  }
+</style>
+
+
+<link rel='stylesheet' href='https://unpkg.com/chevrotain@4.1.0/diagrams/diagrams.css'>
+
+<script src='https://unpkg.com/chevrotain@4.1.0/diagrams/vendor/railroad-diagrams.js'></script>
+<script src='https://unpkg.com/chevrotain@4.1.0/diagrams/src/diagrams_builder.js'></script>
+<script src='https://unpkg.com/chevrotain@4.1.0/diagrams/src/diagrams_behavior.js'></script>
+<script src='https://unpkg.com/chevrotain@4.1.0/diagrams/src/main.js'></script>
+
+<div id="diagrams" align="center"></div>    
+
+<script>
+    window.serializedGrammar = [
+  {
+    "type": "Rule",
+    "name": "tree",
+    "orgText": "() => {\n            const _constraints = [];\n            // Get any constraints in top of the document\n            this.OPTION2(() => _constraints.push(this.SUBRULE2(this.constraint)));\n            // Find any nodes in the given input\n            const nodes = [];\n            this.MANY1(() => {\n                nodes.push(this.SUBRULE1(this.node));\n            });\n            // Return the node tree as a collection\n            return ({\n                _t: \"collection\",\n                _assignment: \"root\",\n                _constraints,\n                _expanded: false,\n                _tags: [],\n                _content: nodes,\n            });\n        }",
+    "definition": [
+      {
+        "type": "Option",
+        "idx": 2,
+        "definition": [
+          {
+            "type": "NonTerminal",
+            "name": "constraint",
+            "idx": 2
+          }
+        ]
+      },
+      {
+        "type": "Repetition",
+        "idx": 1,
+        "definition": [
+          {
+            "type": "NonTerminal",
+            "name": "node",
+            "idx": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "node",
+    "orgText": "() => {\n            // Create a default metadata object to modify\n            const metadata = {};\n            // Get the assigned path to this node, if any\n            this.OPTION1(() => metadata._assignment = this.SUBRULE1(this.assignment));\n            // Get the constraints on this node, if any\n            this.OPTION2(() => metadata._constraints = [this.SUBRULE2(this.constraint)]);\n            // Determine if this node should be expanded\n            // Only possible if the node does not have an assignment\n            if (!metadata._assignment) {\n                this.OPTION3(() => metadata._expanded = this.SUBRULE3(this.expansion));\n            }\n            // Consume any one type of node\n            const node = this.OR4([\n                { ALT: () => this.SUBRULE4(this.actionNode) },\n                { ALT: () => this.SUBRULE4(this.collectionNode) },\n                { ALT: () => this.SUBRULE4(this.emptyNode) },\n                { ALT: () => this.SUBRULE4(this.leafNode) },\n                { ALT: () => this.SUBRULE4(this.reference) },\n            ]);\n            // Identify any tags at this node\n            this.MANY5(() => {\n                metadata._tags.push(this.SUBRULE5(this.tag));\n            });\n            // Return a node with added metadata\n            return (Object.assign({}, node, metadata));\n        }",
+    "definition": [
+      {
+        "type": "Option",
+        "idx": 1,
+        "definition": [
+          {
+            "type": "NonTerminal",
+            "name": "assignment",
+            "idx": 1
+          }
+        ]
+      },
+      {
+        "type": "Option",
+        "idx": 2,
+        "definition": [
+          {
+            "type": "NonTerminal",
+            "name": "constraint",
+            "idx": 2
+          }
+        ]
+      },
+      {
+        "type": "Option",
+        "idx": 3,
+        "definition": [
+          {
+            "type": "NonTerminal",
+            "name": "expansion",
+            "idx": 3
+          }
+        ]
+      },
+      {
+        "type": "Alternation",
+        "idx": 4,
+        "definition": [
+          {
+            "type": "Flat",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "actionNode",
+                "idx": 4
+              }
+            ]
+          },
+          {
+            "type": "Flat",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "collectionNode",
+                "idx": 4
+              }
+            ]
+          },
+          {
+            "type": "Flat",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "emptyNode",
+                "idx": 4
+              }
+            ]
+          },
+          {
+            "type": "Flat",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "leafNode",
+                "idx": 4
+              }
+            ]
+          },
+          {
+            "type": "Flat",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "reference",
+                "idx": 4
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Repetition",
+        "idx": 5,
+        "definition": [
+          {
+            "type": "NonTerminal",
+            "name": "tag",
+            "idx": 5
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "collectionNode",
+    "orgText": "() => {\n            // Create a default node to modify\n            const node = {\n                _t: \"collection\",\n                _content: []\n            };\n            // Open the node decleration\n            this.CONSUME1(LeftBracket);\n            // Add child nodes\n            this.AT_LEAST_ONE2(() => {\n                const child = this.SUBRULE2(this.node);\n                node._content.push(child);\n            });\n            // Close the node decleration\n            this.CONSUME3(RightBracket);\n            // Return the node\n            return (node);\n        }",
+    "definition": [
+      {
+        "type": "Terminal",
+        "name": "LeftBracket",
+        "label": "LeftBracket",
+        "idx": 1,
+        "pattern": "\\["
+      },
+      {
+        "type": "RepetitionMandatory",
+        "idx": 2,
+        "definition": [
+          {
+            "type": "NonTerminal",
+            "name": "node",
+            "idx": 2
+          }
+        ]
+      },
+      {
+        "type": "Terminal",
+        "name": "RightBracket",
+        "label": "RightBracket",
+        "idx": 3,
+        "pattern": "\\]"
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "emptyNode",
+    "orgText": "() => {\n            // Create a default node to modify\n            const node = {\n                _t: \"empty\"\n            };\n            // Open the node decleration\n            this.CONSUME1(LeftBracket);\n            // Close the node decleration\n            this.CONSUME2(RightBracket);\n            // Return the node\n            return (node);\n        }",
+    "definition": [
+      {
+        "type": "Terminal",
+        "name": "LeftBracket",
+        "label": "LeftBracket",
+        "idx": 1,
+        "pattern": "\\["
+      },
+      {
+        "type": "Terminal",
+        "name": "RightBracket",
+        "label": "RightBracket",
+        "idx": 2,
+        "pattern": "\\]"
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "leafNode",
+    "orgText": "() => {\n            // Get the value of the leaf node\n            const token = this.CONSUME(Identifier);\n            // Return the node\n            return ({ _t: \"leaf\", _value: token.image });\n        }",
+    "definition": [
+      {
+        "type": "Terminal",
+        "name": "Identifier",
+        "label": "Identifier",
+        "idx": 0,
+        "pattern": "[A-Za-z0-9]+"
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "actionNode",
+    "orgText": "() => {\n            // Create a default node to modify\n            const node = {\n                _t: \"action\",\n                _name: \"\",\n                _inputs: [],\n                _output: { _t: \"empty\" }\n            };\n            // Consume the action operator symbol\n            this.CONSUME1(Action);\n            // An action node must be assigned a name\n            this.OPTION2(() => node._name = this.SUBRULE2(this.assignment));\n            // Open the node decleration\n            this.CONSUME3(LeftBracket);\n            // Add any and all input nodes\n            this.MANY4(() => {\n                const child = this.SUBRULE4(this.inputNode);\n                node._inputs.push(child);\n            });\n            // Consume the output symbol\n            this.CONSUME4(Output);\n            // Consume the output node, can be eithar a leaf, collection or empty node\n            node._output = this.OR5([\n                { ALT: () => this.SUBRULE5(this.leafNode) },\n                { ALT: () => this.SUBRULE5(this.collectionNode) },\n                { ALT: () => this.SUBRULE5(this.emptyNode) }\n            ]);\n            // Close the node decleration\n            this.CONSUME6(RightBracket);\n            // Return the node\n            return (node);\n        }",
+    "definition": [
+      {
+        "type": "Terminal",
+        "name": "Action",
+        "label": "Action",
+        "idx": 1,
+        "pattern": "@"
+      },
+      {
+        "type": "Option",
+        "idx": 2,
+        "definition": [
+          {
+            "type": "NonTerminal",
+            "name": "assignment",
+            "idx": 2
+          }
+        ]
+      },
+      {
+        "type": "Terminal",
+        "name": "LeftBracket",
+        "label": "LeftBracket",
+        "idx": 3,
+        "pattern": "\\["
+      },
+      {
+        "type": "Repetition",
+        "idx": 4,
+        "definition": [
+          {
+            "type": "NonTerminal",
+            "name": "inputNode",
+            "idx": 4
+          }
+        ]
+      },
+      {
+        "type": "Terminal",
+        "name": "Output",
+        "label": "Output",
+        "idx": 4,
+        "pattern": "=[>|=]"
+      },
+      {
+        "type": "Alternation",
+        "idx": 5,
+        "definition": [
+          {
+            "type": "Flat",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "leafNode",
+                "idx": 5
+              }
+            ]
+          },
+          {
+            "type": "Flat",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "collectionNode",
+                "idx": 5
+              }
+            ]
+          },
+          {
+            "type": "Flat",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "emptyNode",
+                "idx": 5
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Terminal",
+        "name": "RightBracket",
+        "label": "RightBracket",
+        "idx": 6,
+        "pattern": "\\]"
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "inputNode",
+    "orgText": "() => {\n            // Create a default input node to modify\n            const node = {\n                _t: \"input\",\n                _assignment: \"\",\n                _constraints: [],\n                _value: { _t: \"empty\" }\n            };\n            // Consume the input symbol\n            this.CONSUME1(Input);\n            // Get the assigned path of the input\n            node._assignment = this.SUBRULE2(this.assignment);\n            // Consume the constrains for this input, if any\n            this.OPTION3(() => node._constraints.push(this.SUBRULE3(this.constraint)));\n            // Get the value of the input node\n            node._value = this.SUBRULE4(this.node);\n            // Return the node\n            return (node);\n        }",
+    "definition": [
+      {
+        "type": "Terminal",
+        "name": "Input",
+        "label": "Input",
+        "idx": 1,
+        "pattern": "->"
+      },
+      {
+        "type": "NonTerminal",
+        "name": "assignment",
+        "idx": 2
+      },
+      {
+        "type": "Option",
+        "idx": 3,
+        "definition": [
+          {
+            "type": "NonTerminal",
+            "name": "constraint",
+            "idx": 3
+          }
+        ]
+      },
+      {
+        "type": "NonTerminal",
+        "name": "node",
+        "idx": 4
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "reference",
+    "orgText": "() => {\n            // Open the reference decleration\n            this.CONSUME1(LeftReferenceBracket);\n            // Get the reference path\n            const token = this.CONSUME2(Reference);\n            // Close the refernce decleration\n            this.CONSUME3(RighReferenceBracket);\n            // Return the node\n            return ({ _t: \"reference\", _path: token.image });\n        }",
+    "definition": [
+      {
+        "type": "Terminal",
+        "name": "LeftReferenceBracket",
+        "label": "LeftReferenceBracket",
+        "idx": 1,
+        "pattern": "\\("
+      },
+      {
+        "type": "Terminal",
+        "name": "Reference",
+        "label": "Reference",
+        "idx": 2,
+        "pattern": "[^\\)]+"
+      },
+      {
+        "type": "Terminal",
+        "name": "RighReferenceBracket",
+        "label": "RighReferenceBracket",
+        "idx": 3,
+        "pattern": "\\)"
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "constraint",
+    "orgText": "() => {\n            // NOTE: At this time it is only possible to identify a single constraint\n            // using this rule, multiple constraints should be possilbe in the future\n            // Create a default constraint to modify\n            const constraint = {\n                _t: \"constraint\",\n                _matches: \"any\",\n                _list: false,\n                _optional: false\n            };\n            // Open the constraints decleration\n            this.CONSUME1(LeftCurlyBracket);\n            // Identify if this is a list constraint or not\n            this.OR2([\n                { ALT: () => { this.CONSUME2(Equals); constraint._list = false; } },\n                { ALT: () => { this.CONSUME2(Grid); constraint._list = true; } },\n                { ALT: () => { this.CONSUME2(L); constraint._list = true; } }\n            ]);\n            // Identify the specific match property of this contraint\n            this.OR3([\n                { ALT: () => { this.CONSUME3(StringType); constraint._matches = \"string\"; } },\n                { ALT: () => { this.CONSUME3(NumberType); constraint._matches = \"number\"; } },\n                { ALT: () => { this.CONSUME3(BooleanType); constraint._matches = \"bool\"; } },\n                { ALT: () => { this.CONSUME3(AnyType); constraint._matches = \"any\"; } },\n                {\n                    ALT: () => {\n                        constraint._matches = this.SUBRULE3(this.reference);\n                    }\n                }\n            ]);\n            // Identify if this constraint is optional or not\n            this.OPTION4(() => { this.CONSUME4(Optional); constraint._optional = true; });\n            // Close the constraint decleration\n            this.CONSUME5(RighCurlyBracket);\n            // Return the node\n            return (constraint);\n        }",
+    "definition": [
+      {
+        "type": "Terminal",
+        "name": "LeftCurlyBracket",
+        "label": "LeftCurlyBracket",
+        "idx": 1,
+        "pattern": "\\{"
+      },
+      {
+        "type": "Alternation",
+        "idx": 2,
+        "definition": [
+          {
+            "type": "Flat",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "Equals",
+                "label": "Equals",
+                "idx": 2,
+                "pattern": "\\="
+              }
+            ]
+          },
+          {
+            "type": "Flat",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "Grid",
+                "label": "Grid",
+                "idx": 2,
+                "pattern": "\\:\\:"
+              }
+            ]
+          },
+          {
+            "type": "Flat",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "L",
+                "label": "L",
+                "idx": 2,
+                "pattern": "l"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Alternation",
+        "idx": 3,
+        "definition": [
+          {
+            "type": "Flat",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "StringType",
+                "label": "StringType",
+                "idx": 3,
+                "pattern": "string"
+              }
+            ]
+          },
+          {
+            "type": "Flat",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "NumberType",
+                "label": "NumberType",
+                "idx": 3,
+                "pattern": "number"
+              }
+            ]
+          },
+          {
+            "type": "Flat",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "BooleanType",
+                "label": "BooleanType",
+                "idx": 3,
+                "pattern": "bool"
+              }
+            ]
+          },
+          {
+            "type": "Flat",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "AnyType",
+                "label": "AnyType",
+                "idx": 3,
+                "pattern": "any"
+              }
+            ]
+          },
+          {
+            "type": "Flat",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "reference",
+                "idx": 3
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Option",
+        "idx": 4,
+        "definition": [
+          {
+            "type": "Terminal",
+            "name": "Optional",
+            "label": "Optional",
+            "idx": 4,
+            "pattern": "\\?"
+          }
+        ]
+      },
+      {
+        "type": "Terminal",
+        "name": "RighCurlyBracket",
+        "label": "RighCurlyBracket",
+        "idx": 5,
+        "pattern": "\\}"
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "tag",
+    "orgText": "() => {\n            // Check that this is a tag\n            this.CONSUME1(Tag);\n            // Get the textual name of the tag\n            const token = this.CONSUME2(Identifier);\n            // Returns the tag\n            return (token.image);\n        }",
+    "definition": [
+      {
+        "type": "Terminal",
+        "name": "Tag",
+        "label": "Tag",
+        "idx": 1,
+        "pattern": "\\#"
+      },
+      {
+        "type": "Terminal",
+        "name": "Identifier",
+        "label": "Identifier",
+        "idx": 2,
+        "pattern": "[A-Za-z0-9]+"
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "assignment",
+    "orgText": "() => {\n            // Get the identifier of the assignment\n            const token = this.CONSUME1(Identifier);\n            // Consume the assignment operator\n            this.CONSUME2(Assignment);\n            // Return the assigned path\n            return (token.image);\n        }",
+    "definition": [
+      {
+        "type": "Terminal",
+        "name": "Identifier",
+        "label": "Identifier",
+        "idx": 1,
+        "pattern": "[A-Za-z0-9]+"
+      },
+      {
+        "type": "Terminal",
+        "name": "Assignment",
+        "label": "Assignment",
+        "idx": 2,
+        "pattern": "\\:"
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "expansion",
+    "orgText": "() => {\n            // Consume the expand operator\n            this.CONSUME1(Ellipsis);\n            // Return true if it should be expanded\n            return (true);\n        }",
+    "definition": [
+      {
+        "type": "Terminal",
+        "name": "Ellipsis",
+        "label": "Ellipsis",
+        "idx": 1,
+        "pattern": "\\.\\.\\."
+      }
+    ]
+  }
+];
+</script>
+
+<script>
+    var diagramsDiv = document.getElementById("diagrams");
+    main.drawDiagramsFromSerializedGrammar(serializedGrammar, diagramsDiv);
+</script>

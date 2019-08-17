@@ -1,6 +1,6 @@
 {
 	"name": "beat-language-parser",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"description": "Parser library with core functionality for Beat",
 	"author": "Viktor Lyresten <viktor@lyresten.se>",
 	"license": "UNLICENCED",
@@ -14,10 +14,12 @@
 	},
 	"dependencies": {
 		"chevrotain": "^4.1.0",
-		"lodash": "^4.17.11"
+		"lodash": "^4.17.11",
+		"typescript": "^3.5.2"
 	},
 	"scripts": {
 		"watch": "tsc -w -p ./tsconfig.json",
-		"compile": "tsc -p ./tsconfig.json"
+		"compile": "tsc -p ./tsconfig.json",
+		"test": "ts-node test.ts"
 	}
 }
