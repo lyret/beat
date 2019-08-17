@@ -1,59 +1,78 @@
 {
-	"name": "beat language syntax",
-	"version": "0.1.0",
+	"name": "beat (manual) language syntax",
+	"version": "0.3.0",
 	"scopeName": "source.beat",
 	"fileTypes": [
-		"b"
+	  "b"
 	],
 	"patterns": [
-		{
-			"begin": "<\/\/",
-			"end": "\/\/>",
-			"name": "comment.block"
-		},
-		{
-			"match": "(@)([a-z|A-Z|0-9]*)\\b",
-			"name": "entity.function",
-			"captures": {
-				"1": {
-					"name": "keyword.operator"
-				},
-				"2": {
-					"name": "entity.name.function"
-				}
-			}
-		},
-		{
-			"match": ":",
-			"name": "keyword.operator"
-		},
-		{
-			"match": "(<\/?)([a-z|A-Z|0-9]*)(\/?>)",
-			"captures": {
-				"1": {
-					"name": "keyword.control"
-				},
-				"2": {
-					"name": "entity.name.tag"
-				},
-				"3": {
-					"name": "keyword.control"
-				}
-			}
-		},
-		{
-			"match": "(\\[)(.*)(\\])",
-			"captures": {
-				"1": {
-					"name": "keyword.control"
-				},
-				"2": {
-					"name": "string"
-				},
-				"3": {
-					"name": "keyword.control"
-				}
-			}
-		}
+	  {
+		"match": "\\/.*\\/",
+		"name": "comment"
+	  },
+	  {
+		"match": "[\\[|\\]|\\{|\\}|\\(|\\)]",
+		"name": "entity.name.tag"
+	  },
+	  {
+		"match": "\\=",
+		"name": "support.function"
+	  },
+	  {
+		"match": "\\?",
+		"name": "support.function"
+	  },
+	  {
+		"match": "\\.\\.\\.",
+		"name": "support.function"
+	  },
+	  {
+		"match": "\\:\\:",
+		"name": "support.function"
+	  },
+	  {
+		"match": "l",
+		"name": "support.function"
+	  },
+	  {
+		"match": "->",
+		"name": "support.function"
+	  },
+	  {
+		"match": "=[>|=]",
+		"name": "support.function"
+	  },
+	  {
+		"match": "string",
+		"name": "support.constant"
+	  },
+	  {
+		"match": "number",
+		"name": "support.constant"
+	  },
+	  {
+		"match": "bool",
+		"name": "support.constant"
+	  },
+	  {
+		"match": "\\#[A-Za-z0-9]+",
+		"name": "string"
+	  },
+	  {
+		"match": "\\@[A-Za-z0-9]+\\:",
+		"name": "support.function"
+	  },
+	  {
+		"match": "[A-Za-z0-9]+\\:",
+		"name": "entity.name"
+	  },
+	  {
+		"match": "[A-Za-z0-9]+\\:",
+		"name": "keyword.control"
+	  },
+	  {
+		"match": "[A-Za-z0-9]+",
+		"name": "string"
+	  }
 	]
-}
+  }
