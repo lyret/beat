@@ -15,11 +15,13 @@
 	"dependencies": {
 		"chevrotain": "^4.1.0",
 		"lodash": "^4.17.11",
+		"mermaid.cli": "^0.5.1",
 		"typescript": "^3.5.2"
 	},
 	"scripts": {
 		"watch": "tsc -w -p ./tsconfig.json",
 		"compile": "tsc -p ./tsconfig.json",
-		"test": "ts-node test.ts"
+		"test": "ts-node test.ts",
+		"graph": "mmdc -i graph.mmd -o graph.png"
 	}
 }

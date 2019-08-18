@@ -1,0 +1,21 @@
+graph LR
+    Input((Text Input))
+    DebugOutput((Debug Output))
+    TextOutput((Text Output))
+	LexifiedInput((List of recognized tokens))
+	Tree((Object Tree))
+	Lexer[Text Lexer]
+	Parser[Token Parser]
+	DebugIntepreter[Debug Intepreter]
+	TextIntepreter[Textual Representation Intepreter]
+	ResolveIntepreter[Resolve Intepreter]
+	Input-->Lexer
+	Lexer-->LexifiedInput
+	LexifiedInput-->Parser
+	Parser-->Tree
+	Tree-->ResolveIntepreter
+	Tree-->DebugIntepreter
+	Tree-->TextIntepreter
+	ResolveIntepreter-->Tree
+	DebugIntepreter-->DebugOutput
+	TextIntepreter-->TextOutput
