@@ -1,25 +1,12 @@
 {
-	"folders": [
-		{
-			"path": "lerna_packages/code_client"
-		},
-		{
-			"path": "lerna_packages/language_parser"
-		},
-		{
-			"path": "lerna_packages/language_server"
-		},
-		{
-			"path": "planing"
-		}
-	],
 	"settings": {
 		"files.exclude": {
 			".vscode": true,
 			".gitignore": true,
 			".vscodeignore": true,
-			".output": true,
+			"dist": true,
 			".nvmrc": true,
+			"package.json": true,
 			"lerna.json": true,
 			"*.code-workspace": true,
 			"tsconfig.base.json": true,
@@ -34,25 +21,70 @@
 			".vscodeignore": false,
 			".nvmrc": false,
 			"*.code-workspace": false,
+			"package.json": false,
 			"lerna.json": false,
 			"tsconfig.base.json": false,
 			"**/tsconfig.json": false,
 			"**/*.log": false,
 			"**/node_modules": true,
 			"**/package-lock.json": true,
-			".output": true
+			"dist": true
 		},
 		"typescript.tsdk": "./node_modules/typescript/lib",
 		"typescript.tsc.autoDetect": "off",
 		"npm.enableScriptExplorer": false
 	},
+	"folders": [
+		{
+			"name": "Code client",
+			"path": "lerna_packages/code_client"
+		},
+		{
+			"name": "Language server",
+			"path": "lerna_packages/language_server"
+		},
+		{
+			"name": "Testing",
+			"path": "testing"
+		},
+		{
+			"name": "Documenation",
+			"path": "documentation"
+		},
+		{
+			"name": "Source",
+			"path": "lerna_packages/language_source"
+		}
+	],
 	"launch": {
+		"configurations": [
+			{
+				"type": "extensionHost",
+				"request": "launch",
+				"name": "Launch Extension",
+				"args": [
+					"--extensionDevelopmentPath=${workspaceFolder:Code client}"
+				],
+				"runtimeExecutable": "${execPath}",
+				"outFiles": [
+					"${workspaceFolder:Code client}/dist/**/*.js"
+				]
+			},
+			{
+				"type": "node",
+				"request": "attach",
+				"name": "Attach language server",
+				"port": 6009,
+				"restart": true,
+				"outFiles": [
+					"${workspaceFolder:Language server}/dist/**/*.js"
+				]
+			}
+		],
 		"compounds": [
 			{
 				"name": "Watch all",
-				"configurations": [
-					
-				]
+				"configurations": []
 			}
 		]
 	}

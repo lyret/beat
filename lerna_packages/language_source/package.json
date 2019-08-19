@@ -1,20 +1,19 @@
 {
-	"name": "beat-language-server",
+	"name": "beat-language",
 	"version": "0.1.0",
-	"description": "Language service protocol implementation for the Beat programming language",
-	"author": "Viktor lyresten <viktor@lyresten.se>",
+	"description": "Source library with core functionality for the Beat programming language",
+	"author": "Viktor Lyresten <viktor@lyresten.se>",
 	"license": "UNLICENCED",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/lyret/beat"
 	},
-	"main": "dist/server",
 	"engines": {
 		"node": "*"
 	},
 	"dependencies": {
-		"beat-language": "^0.1.0",
-		"vscode-languageserver": "^4.4.2"
+		"chevrotain": "^4.1.0",
+		"lodash": "^4.17.11"
 	},
 	"scripts": {
 		"watch": "tsc -w -p ./tsconfig.json",

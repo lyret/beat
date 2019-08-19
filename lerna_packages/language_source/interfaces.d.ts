@@ -96,4 +96,27 @@ declare module Beat {
 		/** Indiciates that the node must be a collection of the given constraint instead of matching its own content */
 		_list: boolean
 	}
+
+	/**
+	 * Common interface for problems
+	 * identified in the parsing of text content
+	 * for making sure that errors/warnings can be respresented correctly
+	 * independent on the user enviornment.
+	 */
+	export interface Problem {
+		name: string,
+		message: string
+		token: {
+			image?: string
+			startOffset: number
+			endOffset: number
+			startLine: number
+			endLine: number
+			startColumn: number
+			endColumn: number
+			tokenTypeIdx?: number
+			tokenType?: any
+		}
+		previousToken?: any
+	}
 }

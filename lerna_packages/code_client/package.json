@@ -1,7 +1,7 @@
 {
 	"name": "beat-vscode-client",
 	"version": "0.1.0",
-	"description": "A vs code extension client that provides language services for Beat",
+	"description": "A VS code extension that provides language services for the Beat programming language",
 	"author": "Viktor Lyresten <viktor@lyresten.se>",
 	"license": "UNLICENCED",
 	"publisher": "Viktor Lyresten <viktor@lyresten.se>",
@@ -13,7 +13,7 @@
 		"type": "git",
 		"url": "https://github.com/lyret/beat"
 	},
-	"main": ".output/client",
+	"main": "dist/client",
 	"engines": {
 		"vscode": "^1.27.0"
 	},
@@ -66,10 +66,10 @@
 		"vscode-languageclient": "^5.1.0"
 	},
 	"scripts": {
+		"vscode:prepublish": "npm run update-vscode && npm run compile",
+		"postinstall": "npm run update-vscode",
 		"watch": "tsc -w -p ./tsconfig.json",
 		"compile": "tsc -p ./tsconfig.json",
-		"update-vscode": "vscode-install",
-		"postinstall": "npm run update-vscode",
-		"vscode:prepublish": "npm run update-vscode && npm run compile"
+		"update-vscode": "vscode-install"
 	}
 }
