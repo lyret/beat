@@ -9,7 +9,7 @@ import { Intepreter } from "./abstract";
 export class DebugIntepreter extends Intepreter<string, string> {
 	private padding: number = 1;
 
-	/** Creates a string prefix for padding the output row from the left depending */
+	/** Creates a string prefix for padding the output row from the left */
 	private get prefix(): string {
 		return Array(this.padding).join("   |");
 	}

@@ -2,7 +2,7 @@
 card: [
 	name: { =string } []
 	value: { =number } []
-	quantity: { =number } 8
+	quantity: { =number } 8 #default
 ]
 
 cards: { ::(card) } [

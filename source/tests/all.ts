@@ -2,13 +2,16 @@ import { map } from 'lodash';
 import { readFileSync } from 'fs';
 import { TextParser } from '../parsers/text';
 import { DebugIntepreter } from '../interpreters/debug';
+import { TextIntepreter } from '../interpreters/text';
 
 // This file, when executed with node from the terminal, outputs debug information about the testfile 'test.b'
 if (!module.parent) {
 	const input = readFileSync(`${__dirname}/test.b`, { encoding: 'UTF-8' });
 	const parser = new TextParser();
 	const { tokens, errors, tree } = parser.parse(input);
-	const intepreter = new DebugIntepreter();
+	const debugIntepreter = new DebugIntepreter();
+	const textIntepreter = new TextIntepreter();
+
 	if (errors.length > 0) {
 		console.log("\nERRORS:");
 		console.log(JSON.stringify(errors, null, 2));
@@ -20,8 +23,11 @@ if (!module.parent) {
 		console.log("\n\nOBJECT TREE:");
 		console.log(JSON.stringify(tree, null, 2));
 
-		console.log("\n\nTEXTUAL INTEPRETATION:");
-		console.log(intepreter.traverse(tree));
+		console.log("\n\nDEBUG INTEPRETATION:");
+		console.log(debugIntepreter.traverse(tree));
+
+		console.log("\n\TEXT INTEPRETATION:");
+		console.log(textIntepreter.traverse(tree));
 	}
 }
 
