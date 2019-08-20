@@ -1,3 +1,4 @@
+import { Beat } from "../interfaces/beat";
 import { Intepreter } from "./abstract";
 
 /**

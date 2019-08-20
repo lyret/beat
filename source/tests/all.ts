@@ -5,18 +5,19 @@ import { DebugIntepreter } from '../interpreters/debug';
 
 // This file, when executed with node from the terminal, outputs debug information about the testfile 'test.b'
 if (!module.parent) {
+	console.log("hej")
 	const input = readFileSync('test.b', { encoding: 'UTF-8' });
 	const parser = new TextParser();
 	const { tokens, errors, tree } = parser.parse(input);
 	const intepreter = new DebugIntepreter();
-
+	console.log("hej")
 	if (errors.length > 0) {
 		console.log("\nERRORS:");
 		console.log(JSON.stringify(errors, null, 2));
 	}
 	else {
 		console.log("\nTOKENS:");
-		console.log(JSON.stringify(map(tokens, token => `${token.image} (${token.tokenType.tokenName})`), null, 2));
+		console.log(JSON.stringify(map(tokens, token => `${token.image} (${token.tokenType ? token.tokenType.tokenName : 'Unknown Token!'})`), null, 2));
 
 		console.log("\n\nOBJECT TREE:");
 		console.log(JSON.stringify(tree, null, 2));

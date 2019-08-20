@@ -59,10 +59,4 @@ The _in-progress_ first [implementation](beat/source) of Beat is being developed
 ![node-version](https://img.shields.io/badge/node%20-v10.11.0-brightgreen)
 ![typescript-version](https://img.shields.io/badge/typescript-3.1.1-blue)
 
-No globaly installed packages are needed, but depending on your use case I recomend installing the following cmd tools:
- - **nvm:** For switching to the correct node version, needed for running the npm scripts.
- - **ts-node:** Is necessary for running the source code tests.
-
-**Visual studio code** is recommended to test and work on the Language server implementation and Editor extension.
-
-Basic knowledge for using node.js and npm is required for getting started.
+A basic knowledge for using node.js, npm and typescript is required for getting started. No global packages are needed, but depending on your use case I recommend installing **nvm** and using it for switching to the correct node version for this project. Also **Visual studio code** is needed to test and work on the Language server implementation and Editor extension.

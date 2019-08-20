@@ -4,16 +4,16 @@
 			".vscode": true,
 			".gitignore": true,
 			".vscodeignore": true,
-			"dist": true,
 			".nvmrc": true,
-			"package.json": true,
-			"lerna.json": true,
 			"*.code-workspace": true,
-			"tsconfig.base.json": true,
-			"**/tsconfig.json": true,
-			"**/*.log": true,
+			"package.json": false,
+			"**/tsconfig.json": false,
 			"**/node_modules": true,
 			"**/package-lock.json": true,
+			"build": true,
+			"code_client": true,
+			"language_server": true,
+			"source": true,
 		},
 		"search.exclude": {
 			".vscode": false,
@@ -22,13 +22,13 @@
 			".nvmrc": false,
 			"*.code-workspace": false,
 			"package.json": false,
-			"lerna.json": false,
-			"tsconfig.base.json": false,
 			"**/tsconfig.json": false,
-			"**/*.log": false,
 			"**/node_modules": true,
 			"**/package-lock.json": true,
-			"dist": true
+			"build": true,
+			"code_client": false,
+			"language_server": false,
+			"source": false,
 		},
 		"typescript.tsdk": "./node_modules/typescript/lib",
 		"typescript.tsc.autoDetect": "off",
@@ -36,16 +36,16 @@
 	},	
 	"folders": [
 		{
+			"name": "Beat",
+			"path": "."
+		},
+		{
 			"name": "Code client",
 			"path": "code_client"
 		},
 		{
 			"name": "Language server",
 			"path": "language_server"
-		},
-		{
-			"name": "Documenation",
-			"path": "documentation"
 		},
 		{
 			"name": "Source",

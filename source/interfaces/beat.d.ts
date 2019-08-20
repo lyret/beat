@@ -7,25 +7,25 @@
  * These declerations can be used in any typescript
  * implementation related to the beat language.
  */
-declare namespace Beat {
+export namespace Beat {
 
 	/** A primary type */
-	type Primary = "string" | "number" | "bool" | "any";
+	export type Primary = "string" | "number" | "bool" | "any";
 
 	/** A type of node object */
-	type Type = "collection" | "reference" | "leaf" | "empty" | "constraint" | "action" | "input" | "output";
+	export type Type = "collection" | "reference" | "leaf" | "empty" | "constraint" | "action" | "input" | "output";
 
 	/** A Node with added metadata */
-	type NodeWithMetadata = Node & Metadata;
+	export type NodeWithMetadata = Node & Metadata;
 
 	/** A basic node object of unknown type */
-	interface Node {
+	export interface Node {
 		/** The identified type of node */
 		_t: Type
 	}
 
 	/** Metadata that can be added to any node, not all values are available in all circumstances */
-	interface Metadata {
+	export interface Metadata {
 		/** The assigned path name of this node if added, used for path finding */
 		_assignment?: string
 		/** List of tags added to this node */
@@ -45,7 +45,7 @@ declare namespace Beat {
 	}
 
 	/** A node with a single value and no further child nodes */
-	interface LeafNode extends Node {
+	export interface LeafNode extends Node {
 		_t: "leaf"
 
 		/** The value of this node */
@@ -53,12 +53,12 @@ declare namespace Beat {
 	}
 
 	/** An empty node without value or children */
-	interface EmptyNode extends Node {
+	export interface EmptyNode extends Node {
 		_t: "empty"
 	}
 
 	/** A node that declerares a reference to another node in the object hierarchy */
-	interface ReferenceNode extends Node {
+	export interface ReferenceNode extends Node {
 		_t: "reference"
 
 		/** The path to the referenced node */
@@ -66,7 +66,7 @@ declare namespace Beat {
 	}
 
 	/** A decleration of an action that can be invoked later */
-	interface ActionNode extends Node {
+	export interface ActionNode extends Node {
 		_t: "action"
 
 		/** The unique name of the action */
@@ -78,7 +78,7 @@ declare namespace Beat {
 	}
 
 	/** A node that resolves to references or values when the action is invoked */
-	interface InputNode extends Node {
+	export interface InputNode extends Node {
 		_t: "input"
 
 		/** The assigned path name of this input, must be added to inputs */ // TODO: should be optional, function as gates if not assigned
@@ -89,7 +89,7 @@ declare namespace Beat {
 	}
 
 	/** A constraint is a special node added as metadata to any node, it functions as a filter for node content */
-	interface ContstraintsNode extends Node {
+	export interface ContstraintsNode extends Node {
 		_t: "constraint"
 
 		/** Must match the given type of primary, or a given reference node */

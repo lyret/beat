@@ -1,8 +1,6 @@
 {
 	"compilerOptions": {
-		"noImplicitAny": false,
-		"noImplicitReturns": true,
-		"noUnusedLocals": false,
+		"sourceMap": true,
 		"noUnusedParameters": true,
 		"allowSyntheticDefaultImports": true,
 		"lib": [
@@ -11,14 +9,11 @@
 		"module": "commonjs",
 		"moduleResolution": "node",
 		"target": "es6",
-		"declaration": true,
-		"sourceMap": true,
-		"outDir": "build/"
-	},
-	"typeAcquisition": { 
-		"enable": true,
-		"include": [
-			"source/interfaces"
+		"outDir": "build/",
+		"baseUrl": ".",
+		"typeRoots": [
+			"./node_modules/@types",
+			"./source/interfaces"
 		]
 	},
 	"exclude": [

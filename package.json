@@ -1,12 +1,12 @@
 {
 	"name": "beat",
-	"version": "0.1.0",
+	"version": "0.3.0",
 	"scripts": {
 		"watch": "npm run verify && tsc -w -p ./tsconfig.json",
 		"compile": "npm run verify && tsc -p ./tsconfig.json",
-		"test": "npm run verify && ts-node -p ./tsconfig.json source/tests/all.ts",
+		"test": "npm run verify && ts-node source/tests/all.ts",
 		"document": "echo 'Not implemented'",
-		"verify": "node -v | grep -q $( cat .nvmrc ) || ( echo 'Wrong version of node installed, please use '$( cat .nvmrc ) && exit 1 )",
+		"verify": "var=$(cat .nvmrc); node -v | grep -q $var || printf \"\\033[0;31mIncorrect version of node installed! Install and use $var\\033[0m.\n\"",
 		"preinstall": "npm run verify",
 		"postinstall": "vscode-install"
 	},
@@ -79,12 +79,13 @@
 		}
 	},
 	"devDependencies": {
-		"@types/node": "^10.11.3",
 		"@types/lodash": "^4.14.116",
+		"@types/node": "^10.14.15",
+		"ts-node": "^8.3.0",
+		"typescript": "^3.1.1",
 		"vscode": "^1.1.21",
 		"vscode-languageclient": "^5.1.0",
-		"vscode-languageserver": "^4.4.2",
-		"typescript": "^3.1.1"
+		"vscode-languageserver": "^4.4.2"
 	},
 	"dependencies": {
 		"chevrotain": "^4.1.0",

@@ -1,5 +1,6 @@
 import { Parser, createToken, Lexer } from 'chevrotain';
 import { uniq, values, flatten } from 'lodash';
+import { Beat } from '../interfaces/beat';
 
 /**
  * **TextParser**
@@ -11,7 +12,7 @@ export class TextParser {
 	// NOTE: This class should in the future extend an abstract parser class for different type of serialized inputs.
 
 	/** Converts, if possible, the given input to a node object */
-	public parse(input: string) : Beat.CollectionNode {
+	public parse(input: string) {
 		// NOTE: Create a common interface + generic overload for the result of parsing
 		const lexer = InternalTextParser.Lexer;
 		const parser = InternalTextParser.Instance;
@@ -260,7 +261,7 @@ class InternalTextParser extends Parser {
 	private node = this.RULE<Beat.NodeWithMetadata>("node", () => {
 
 		// Create a default metadata object to modify
-		const metadata: Beat.Metadata = {};
+		const metadata: Beat.Metadata = { _tags: [] };
 
 		// Get the assigned path to this node, if any
 		this.OPTION1(() => metadata._assignment = this.SUBRULE1(this.assignment));
@@ -285,7 +286,7 @@ class InternalTextParser extends Parser {
 
 		// Identify any tags at this node
 		this.MANY5(() => {
-			metadata._tags.push(this.SUBRULE5(this.tag));
+			metadata._tags!.push(this.SUBRULE5(this.tag));
 		});
 
 		// Return a node with added metadata
