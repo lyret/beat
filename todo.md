@@ -3,6 +3,7 @@
  - [x] Finish 0.1.0
  - [x] Finish 0.2.0
  - [x] Finish 0.3.0
+ - [x] Fix security alerts
  - [x] Publish to master
  - [ ] Resolve FIXMES, TODOS & NOTES in code
  - [ ] Finish resolve intepreter

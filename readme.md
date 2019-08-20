@@ -47,8 +47,8 @@ An Language service protocol implementation for Beat.
 
 
 ### ♥ Thanks to the authors of the following articles:
-https://macromates.com/manual/en/language_grammars
-https://www.apeth.com/nonblog/stories/textmatebundle.html
+ - https://macromates.com/manual/en/language_grammars
+ - https://www.apeth.com/nonblog/stories/textmatebundle.html
 
 
 ## Installing, running and developing
