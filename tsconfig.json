@@ -13,10 +13,16 @@
 		"target": "es6",
 		"declaration": true,
 		"sourceMap": true,
-		"outDir": "dist/"
+		"outDir": "build/"
+	},
+	"typeAcquisition": { 
+		"enable": true,
+		"include": [
+			"source/interfaces"
+		]
 	},
 	"exclude": [
 		"node_modules",
-		"dist"
+		"build"
 	]
 }

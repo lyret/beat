@@ -1,10 +1,13 @@
-/**
- * **Interfaces**
- * This file contains interfaces for the nestable object types
- * created by parsing beat files known as 'nodes'.
- */
 
-declare module Beat {
+/**
+ * **Beat**
+ * Contains interfaces for the nestable object types
+ * created by parsing beat files known as 'nodes' and related
+ * types.
+ * These declerations can be used in any typescript
+ * implementation related to the beat language.
+ */
+declare namespace Beat {
 
 	/** A primary type */
 	type Primary = "string" | "number" | "bool" | "any";
@@ -50,12 +53,12 @@ declare module Beat {
 	}
 
 	/** An empty node without value or children */
-	export interface EmptyNode extends Node {
+	interface EmptyNode extends Node {
 		_t: "empty"
 	}
 
-	/** A node that declerares a reference to another node in the object hiarchy */
-	export interface ReferenceNode extends Node {
+	/** A node that declerares a reference to another node in the object hierarchy */
+	interface ReferenceNode extends Node {
 		_t: "reference"
 
 		/** The path to the referenced node */
@@ -97,6 +100,7 @@ declare module Beat {
 		_list: boolean
 	}
 
+	// TODO: Lacks documentation, is unused
 	/**
 	 * Common interface for problems
 	 * identified in the parsing of text content

@@ -14,7 +14,7 @@ let client: LanguageClient;
 export function activate(context: ExtensionContext) {
 
 	/** Path to the server module */
-	const serverPath = path.join('..', 'language_server', 'dist', 'server.js')
+	const serverPath = path.join('..', 'language_server', 'build', 'server.js')
 	console.log(context.asAbsolutePath(serverPath))
 	process.exit(1);
 	/** Server options */
