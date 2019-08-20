@@ -11,6 +11,7 @@
 		"target": "es6",
 		"outDir": "build/",
 		"baseUrl": ".",
+		"skipLibCheck": true,
 		"typeRoots": [
 			"./node_modules/@types",
 			"./source/interfaces"

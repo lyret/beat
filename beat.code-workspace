@@ -10,7 +10,7 @@
 			"**/tsconfig.json": false,
 			"**/node_modules": true,
 			"**/package-lock.json": true,
-			"build": true,
+			"build": false,
 			"code_client": true,
 			"language_server": true,
 			"source": true,
