@@ -1,5 +1,5 @@
 {
-	"name": "beat (manual) language syntax",
+	"name": "beat language syntax highlights",
 	"version": "0.3.0",
 	"scopeName": "source.beat",
 	"fileTypes": [

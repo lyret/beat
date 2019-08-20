@@ -1,35 +1,20 @@
-<p align="center"><img src="./documentation/files/beat_logo.png" /></p>
+<p align="center"><img src="./files/beat_logo.png" /></p>
+
+## Contents
+
+### source:
+The source code
+
+### code_client:
+A VS code extension that provides language services for the Beat programming language
+
+### language_server:
+Language service protocol implementation for the Beat programming language
 
 # The Beat language
-![GitHub package.json version](https://img.shields.io/github/package-json/v/lyret/beat)
+[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
 ![license](https://img.shields.io/github/license/lyret/beat.svg)
 ![last-commit](https://img.shields.io/github/last-commit/lyret/beat.svg)
-![mantained-status](https://img.shields.io/maintenance/yes/2019)
-![node-version](https://img.shields.io/badge/node%20-v10.11.0-brightgreen)
-![typescript-version](https://img.shields.io/badge/typescript-3.1.1-blue)
-
-## Repository contents:
-
-#### Source:
-The source implementation of the Beat programming language, written in Typescript. See the documentation for further details.
-
- - **Tests**: Contains scripts for testing the source code.
-
-#### **Code client**:
-A VS code extension that provides language services for Beat.
-
- - **Syntax**:
-Contains a TextMate syntax definitions file for themable highligths in VS Code and other editors
-supporting the format.
-
- - **Workspace:**
- Contains testfiles in Beat syntax for testing the IDE with the Beat extension or language server installed.
-
-#### Language server:
-An Language service protocol implementation for Beat.
-
-
-
 
 This is very much a work in progress. Thank you for stopping by. ♥ ♥ ♥
 

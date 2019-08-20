@@ -1,9 +1,18 @@
 {
 	"name": "beat",
 	"version": "0.1.0",
-	"description": "A declarative programming markup language",
+	"scripts": {
+		"watch": "npm run verify && tsc -w -p ./tsconfig.json",
+		"compile": "npm run verify && tsc -p ./tsconfig.json",
+		"test": "npm run verify && ts-node -p ./tsconfig.json source/tests/all.ts",
+		"document": "echo 'Not implemented'",
+		"verify": "node -v | grep -q $( cat .nvmrc ) || ( echo 'Wrong version of node installed, please use '$( cat .nvmrc ) && exit 1 )",
+		"preinstall": "npm run verify",
+		"postinstall": "vscode-install"
+	},
 	"author": "Viktor Lyresten <viktor@lyresten.se>",
 	"license": "UNLICENCED",
+	"description": "A declarative programming and data serialization language",
 	"homepage": "https://github.com/lyret/beat#readme",
 	"bugs": {
 		"url": "https://github.com/lyret/beat/issues"
@@ -12,25 +21,75 @@
 		"type": "git",
 		"url": "git+https://github.com/lyret/beat.git"
 	},
+	"categories": [
+		"Programming Languages"
+	],
+	"keywords": [
+		"multi-root ready"
+	],
 	"engines": {
-		"vscode": "^1.23.0",
+		"vscode": "^1.27.0",
 		"node": "*"
+	},
+	"activationEvents": [
+		"onLanguage:plaintext"
+	],
+	"contributes": {
+		"languages": [
+			{
+				"id": "beat",
+				"aliases": [
+					"BEAT",
+					"Beat Language"
+				],
+				"extensions": [
+					".b"
+				]
+			}
+		],
+		"grammars": [
+			{
+				"language": "beat",
+				"scopeName": "source.beat",
+				"path": "./syntax/beat.tmLanguage.json"
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "Beat language server configuration",
+			"properties": {
+				"languageServerExample.maxNumberOfProblems": {
+					"scope": "resource",
+					"type": "number",
+					"default": 100,
+					"description": "Controls the maximum number of problems reported at once by the language server"
+				},
+				"languageServerExample.trace.server": {
+					"scope": "window",
+					"type": "string",
+					"enum": [
+						"off",
+						"messages",
+						"verbose"
+					],
+					"default": "off",
+					"description": "Traces the communication between VS Code and the language server"
+				}
+			}
+		}
 	},
 	"devDependencies": {
 		"@types/node": "^10.11.3",
 		"@types/lodash": "^4.14.116",
-		"typescript": "^3.1.1",
-		"lerna": "^3.4.0"
+		"vscode": "^1.1.21",
+		"vscode-languageclient": "^5.1.0",
+		"vscode-languageserver": "^4.4.2",
+		"typescript": "^3.1.1"
 	},
-	"scripts": {
-		"postinstall": "npm run bootstrap; npm run compile",
-		"preinstall": "nvm use",
-		"prestart": "nvm use",
-		"compile": "lerna run compile",
-		"watch": "lerna run watch",
-		"bootstrap": "lerna bootstrap; cd lerna_packages/code_client && npm run update-vscode",
-		"list": "lerna ls",
-		"changed": "lerna changed",
-		"push-npm": "lerna publish"
+	"dependencies": {
+		"chevrotain": "^4.1.0",
+		"lodash": "^4.17.11",
+		"vscode-languageserver": "^4.4.2",
+		"typescript": "^3.1.1"
 	}
 }

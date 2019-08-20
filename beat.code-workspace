@@ -33,19 +33,15 @@
 		"typescript.tsdk": "./node_modules/typescript/lib",
 		"typescript.tsc.autoDetect": "off",
 		"npm.enableScriptExplorer": false
-	},
+	},	
 	"folders": [
 		{
 			"name": "Code client",
-			"path": "lerna_packages/code_client"
+			"path": "code_client"
 		},
 		{
 			"name": "Language server",
-			"path": "lerna_packages/language_server"
-		},
-		{
-			"name": "Testing",
-			"path": "testing"
+			"path": "language_server"
 		},
 		{
 			"name": "Documenation",
@@ -53,11 +49,33 @@
 		},
 		{
 			"name": "Source",
-			"path": "lerna_packages/language_source"
+			"path": "source"
 		}
 	],
 	"launch": {
 		"configurations": [
+			{
+				"type": "node",
+				"request": "launch",
+				"name": "Run tests",
+				"runtimeExecutable": "npm",
+				"runtimeArgs": [
+					"run",
+					"test"
+				],
+				"port": 9229
+			},
+			{
+				"type": "node",
+				"request": "launch",
+				"name": "Generate documentation",
+				"runtimeExecutable": "npm",
+				"runtimeArgs": [
+					"run",
+					"document"
+				],
+				"port": 9229
+			},
 			{
 				"type": "extensionHost",
 				"request": "launch",
@@ -79,12 +97,6 @@
 				"outFiles": [
 					"${workspaceFolder:Language server}/dist/**/*.js"
 				]
-			}
-		],
-		"compounds": [
-			{
-				"name": "Watch all",
-				"configurations": []
 			}
 		]
 	}

@@ -7,7 +7,7 @@ import {
 } from 'vscode-languageserver';
 
 import './interfaces';
-import { BeatParser, BeatLexer, /* BeatProblem */ } from 'beat-language-parser'
+import { /* BeatParser, BeatLexer, BeatProblem */ } from '../source';
 
 export function getDocumentSettings(resource: string, connection: Connection, runtime: ServerRuntime): Thenable<LanguageServerSettings> {
 
@@ -44,7 +44,8 @@ export async function validateTextDocument(textDocument: TextDocument, connectio
 	console.log("settings", settings); // NOTE: Debug output
 	let diagnostics: Diagnostic[] = [];
 	let text = textDocument.getText();
-	const tokens = BeatLexer.tokenize(text).tokens;
+	// FIXME: import from source disabled due to refactoring
+	// const tokens = BeatLexer.tokenize(text).tokens;
 
 	// The validator creates diagnostics for all uppercase words length 2 and more
 	// let pattern = /\b[A-Z]{2,}\b/g;
@@ -53,14 +54,15 @@ export async function validateTextDocument(textDocument: TextDocument, connectio
 	const problems: /* BeatProblem */any[] = []; //FIXME: was BeatProblem
 
 	try {
-		BeatParser.input = tokens;
-		BeatParser.createNodeTree();
+		// FIXME: import from source disabled due to refactoring
+		// BeatParser.input = tokens;
+		// BeatParser.createNodeTree();
 
-		if (BeatParser.errors.length > 0) {
-			for (const error of BeatParser.errors) {
-				problems.push(error as any);  // TODO: Should not need to be any
-			}
-		}
+		// if (BeatParser.errors.length > 0) {
+		// 	for (const error of BeatParser.errors) {
+		// 		problems.push(error as any);  // TODO: Should not need to be any
+		// 	}
+		// }
 	} catch (err) {
 		problems.push(err);
 	}
