@@ -1,5 +1,7 @@
 # Test applikationer för BEAT
 
+## Kortspelet Canasta
+
 ## Youtube downloader
 
 ### Stage 1:
@@ -21,3 +23,8 @@ Kunna hämta det aktuella väderföhållandet från en given, difus, plats
 
 ### Steg 2:
 Kunna hämta en värderprogrnos för en given, difus, plats på en given tidpunkt
+
+
+## Andra ideer
+
+### Gemensam mat-sov-dota-kaffepaus klocka
