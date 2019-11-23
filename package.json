@@ -2,11 +2,12 @@
 	"name": "beat",
 	"version": "0.3.1",
 	"scripts": {
-		"watch": "npm run verify && tsc -w -p ./tsconfig.json",
-		"compile": "npm run verify && tsc -p ./tsconfig.json",
-		"test": "npm run verify && ts-node source/tests/all.ts",
+		"watch": "npm run verify && npm run tsc",
+		"compile": "npm run verify && npm run tsc",
+		"test": "npm run verify && ts-node source/test.ts",
 		"document": "echo 'Not implemented'",
 		"verify": "var=$(cat .nvmrc); node -v | grep -q $var || printf \"\\033[0;31mIncorrect version of node installed! Install and use $var\\033[0m.\n\"",
+		"tsc": "./node_modules/typescript/bin/tsc -p ./tsconfig.json",
 		"preinstall": "npm run verify",
 		"postinstall": "vscode-install"
 	},
@@ -90,7 +91,8 @@
 	"dependencies": {
 		"chevrotain": "^4.1.0",
 		"lodash": "^4.17.11",
-		"vscode-languageserver": "^4.4.2",
-		"typescript": "^3.1.1"
+		"table-layout": "^1.0.0",
+		"typescript": "^3.1.1",
+		"vscode-languageserver": "^4.4.2"
 	}
 }
