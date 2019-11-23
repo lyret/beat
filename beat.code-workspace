@@ -30,7 +30,7 @@
 			"language_server": false,
 			"source": false,
 		},
-		"typescript.tsdk": "./node_modules/typescript/lib",
+		"typescript.tsdk": "Beat/node_modules/typescript/lib",
 		"typescript.tsc.autoDetect": "off",
 		"npm.enableScriptExplorer": false
 	},	
