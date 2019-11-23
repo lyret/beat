@@ -1,5 +1,3 @@
-import { Beat } from "../interfaces/beat";
-
 /**
  * **Intepreter**
  * An intepreter is a class with methods for traversing a hierachy of

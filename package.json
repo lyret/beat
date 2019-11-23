@@ -2,14 +2,16 @@
 	"name": "beat",
 	"version": "0.3.1",
 	"scripts": {
-		"watch": "npm run verify && npm run tsc",
-		"compile": "npm run verify && npm run tsc",
-		"test": "npm run verify && ts-node source/test.ts",
+		"test-components": "npm run build && node build/source/test.js components",
+		"compile": "npm run verify && npm run build",
 		"document": "echo 'Not implemented'",
+		"test": "npm run build && node build/source/test.js",
 		"verify": "var=$(cat .nvmrc); node -v | grep -q $var || printf \"\\033[0;31mIncorrect version of node installed! Install and use $var\\033[0m.\n\"",
-		"tsc": "./node_modules/typescript/bin/tsc -p ./tsconfig.json",
 		"preinstall": "npm run verify",
-		"postinstall": "vscode-install"
+		"postinstall": "vscode-install",
+		"build": "./node_modules/typescript/bin/tsc -p ./tsconfig.json",
+		"prebuild": "npm run verify && rm -rf build",
+		"postbuild": "cp -r ./source/assets/ ./build/source/assets/"
 	},
 	"author": "Viktor Lyresten <viktor@lyresten.se>",
 	"license": "UNLICENCED",

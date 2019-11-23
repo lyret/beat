@@ -1,4 +1,5 @@
 { =any }
+
 card: [
 	name: { =string } []
 	value: { =number } []
@@ -36,7 +37,7 @@ game: [
 	]
 	deck: { ::(card) } []
 	pile: { ::(card) } []
-	moves: { =string } []
+	moves: { ::string } []
 ]
 
 @discard: [
@@ -47,7 +48,7 @@ game: [
 		player: [ 
 			...(game.player)
 			hand: [
-				{ !=(card) } ..(game.player.hand)
+				{ !=(card) } ...(game.player.hand)
 			 ]
 		]
 		/ re-adds the pile with the discared card on top /

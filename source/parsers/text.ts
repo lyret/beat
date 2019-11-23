@@ -1,6 +1,5 @@
 import { Parser, createToken, Lexer } from 'chevrotain';
 import { uniq, values, flatten } from 'lodash';
-import { Beat } from '../interfaces/beat';
 
 /**
  * **TextParser**

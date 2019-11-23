@@ -7,7 +7,7 @@
  * These declerations can be used in any typescript
  * implementation related to the beat language.
  */
-export namespace Beat {
+declare module Beat {
 
 	/** A primary type */
 	export type Primary = "string" | "number" | "bool" | "any";
