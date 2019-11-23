@@ -14,7 +14,7 @@ export abstract class Intepreter<OutputData, InternalData = OutputData> {
 	 * @param node The initial object to interpret
 	 */
 	public traverse(root: Beat.Node): OutputData {
-		return this.atNode(root) as any as OutputData;
+		return this.outputConverstion(this.atNode(root));
 	}
 
 	/**
@@ -43,6 +43,14 @@ export abstract class Intepreter<OutputData, InternalData = OutputData> {
 				// Unknown node
 				throw new Error("unknown node type"); // NOTE: better error handling is needed here
 		}
+	}
+
+	/**
+	 * The action neccessary to convert the internal data type to the output data
+	 * should be overridden if InternalData and OutputData is of different types
+	 */
+	protected outputConverstion(internalResults: InternalData) : OutputData {
+		return internalResults as any as OutputData;
 	}
 
 	/** Defines the action to perfrom at a node of the type 'collection' */
