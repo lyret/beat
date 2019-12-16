@@ -5,6 +5,7 @@ import { TextParser } from './parsers/text';
 import { DebugIntepreter } from './interpreters/debug';
 import { ResolveIntepreter } from './interpreters/resolve';
 import { TextIntepreter } from './interpreters/text';
+import { NodeComponent, CollectionNodeComponent } from './classes/components';
 
 // Get the given test argument
 const TESTARG = (process.argv[2] || "DEFAULT").toUpperCase() as "DEFAULT" | "COMPONENTS" | "RESOLVER";
@@ -38,7 +39,11 @@ if (!module.parent) {
 
 /** The the node components */
 function componentsTest() {
-	console.log("Hello world");
+	/** */
+	const context = new CollectionNodeComponent();
+	const child = new CollectionNodeComponent();
+	context.create({ type: child, path: "context" });
+	console.log(child);
 }
 
 /** Tests the resolve interpreter */
