@@ -15,14 +15,21 @@ declare module Beat {
 	/** A type of node object */
 	export type Type = "collection" | "reference" | "leaf" | "empty" | "constraint" | "action" | "input" | "output";
 
-	/** A Node with added metadata */
-	export type NodeWithMetadata = Node & Metadata;
+	
+	/** Any type of node available */
+	export type UnknownNode = CollectionNode | LeafNode | EmptyNode | ReferenceNode | ActionNode | InputNode;
 
+	/** Any type of node with added metadata */
+	export type UnknownNodeWithMetadata = UnknownNode & Metadata;
+	
 	/** A basic node object of unknown type */
 	export interface Node {
 		/** The identified type of node */
 		_t: Type
 	}
+
+	/** A basic node with added metadata */
+	export type NodeWithMetadata = Node & Metadata;
 
 	/** Metadata that can be added to any node, not all values are available in all circumstances */
 	export interface Metadata {
