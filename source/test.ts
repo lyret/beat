@@ -53,17 +53,10 @@ function componentsTest() {
 			console.log(JSON.stringify(errors, null, 2));
 			throw new Error("ERROR!");
 		}
-		console.log(JSON.stringify(tree, null, 2))
 		return (tree._content[0] as any);
 	}
-
-	/** Act */
-	const card = context.create({ _t: "collection", _content: [], _assignment: "card" });
-	card.create({ _assignment: "name", _t: "empty", _constraints: [{ _t: "constraint", _matches: "string" , _optional: false, _list: false }] });
-	card.create({ _assignment: "value", _t: "empty", _constraints: [{ _t: "constraint", _matches: "number" , _optional: false, _list: false }] });
-	card.create({ _assignment: "quantity", _t: "leaf", _value: "8",  _tags: ["default"],  _constraints: [{ _t: "constraint", _matches: "number" , _optional: false, _list: false }] });
 	
-	context.create(getDefinition(`@discard: [
+	const partalTest = getDefinition(`@discard: [
 		-> game: { =(..game) } (..game)
 		-> card: { =(game.player.hand.#selected) } (game.player.hand.#selected)
 		=> [
@@ -72,7 +65,7 @@ function componentsTest() {
 				...(game.player)
 				hand: [
 					{ !=(card) } ...(game.player.hand)
-				 ]
+				]
 			]
 			/ re-adds the pile with the discared card on top /
 			pile: [
@@ -82,7 +75,16 @@ function componentsTest() {
 				...(game.pile.*)
 			]
 		]
-	]`));
+	]`);
+	const fullTest = getDefinition(readFileSync(`${__dirname}/assets/test.b`, { encoding: 'UTF-8' }));
+
+	/** Act */
+	const card = context.create({ _t: "collection", _content: [], _assignment: "card" });
+	card.create({ _assignment: "name", _t: "empty", _constraints: [{ _t: "constraint", _matches: "string" , _optional: false, _list: false }] });
+	card.create({ _assignment: "value", _t: "empty", _constraints: [{ _t: "constraint", _matches: "number" , _optional: false, _list: false }] });
+	card.create({ _assignment: "quantity", _t: "leaf", _value: "8",  _tags: ["default"],  _constraints: [{ _t: "constraint", _matches: "number" , _optional: false, _list: false }] });
+	
+	//context.create(card);
 
 	/** Assert */
 	const tree = context.view();
@@ -94,7 +96,7 @@ function componentsTest() {
 
 /** Tests the resolve interpreter */
 function resolverTest() {
-	const input = readFileSync(`${__dirname}/test.b`, { encoding: 'UTF-8' });
+	const input = readFileSync(`${__dirname}/assets/test.b`, { encoding: 'UTF-8' });
 	const parser = new TextParser();
 	const { tokens, errors, tree } = parser.parse(input);
 	const debugIntepreter = new DebugIntepreter();
