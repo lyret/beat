@@ -91,9 +91,15 @@
 		"vscode-languageserver": "^4.4.2"
 	},
 	"dependencies": {
+		"@types/inquirer": "^6.5.0",
 		"chevrotain": "^4.1.0",
+		"commander": "^4.1.1",
+		"enquirer": "^2.3.4",
+		"inquirer": "^7.0.4",
 		"lodash": "^4.17.11",
+		"shell": "^0.5.0",
 		"table-layout": "^1.0.0",
+		"term-size": "^2.2.0",
 		"typescript": "^3.1.1",
 		"vscode-languageserver": "^4.4.2"
 	}
